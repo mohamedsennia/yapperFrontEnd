@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { User } from "../models/User";
 import { ApiService } from "./Api.serivce";
 import { map } from "rxjs";
-import { Message } from "../models/message";
+import { Message } from "../models/Message";
 
 
 @Injectable({

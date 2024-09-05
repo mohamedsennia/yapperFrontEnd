@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../services/UserService';
 import { User } from '../../models/User';
 import { MessageService } from '../../services/Message.service';
-import { Message } from '../../models/message';
+import { Message } from '../../models/Message';
 import { WebSocketService } from '../../services/WebSocket.service';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { UserService } from './UserService';
-import { Message } from '../models/message';
+import { Message } from '../models/Message';
 import { MessageService } from './Message.service';
 
 @Injectable({

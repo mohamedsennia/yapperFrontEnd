@@ -1,4 +1,4 @@
-import { Message } from "./message";
+import { Message } from "./Message";
 
 export class User{
     constructor( private  id:number,
