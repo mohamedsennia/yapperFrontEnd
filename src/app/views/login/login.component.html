@@ -1,0 +1,62 @@
+<div id="left-side">
+
+</div>
+<div id="right-side">
+ 
+    <div class="flip-card">
+        <div id="switch-section">
+            <span [ngClass]="{'active':flip=='inactive'}" (click)="toggleFlip('inactive')">Login</span>
+            <span [ngClass]="{'active':flip=='active'}"  (click)="toggleFlip('active')">Sign up</span>
+        </div>
+        <div class="flip-card-inner" [@flipAnimation]="flip" >
+          <div class="flip-card-front">
+            <div class="container">
+                <h1>Log in</h1>
+                <form class="form" [formGroup]="loginForm" (ngSubmit)="login()"   id="login-form">
+                    <div >
+                        <input width="100%" autocomplete="email" placeholder="example@email.com" type="text" formControlName="email" >
+                        <span *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid" class="errorMessage">Invalid email</span>
+                    </div>
+                    
+                    <div>
+                    <input autocomplete="current-password" placeholder="Your password" type="password" formControlName="password">
+                    <span *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid" class="errorMessage">Invalid password</span>
+                    </div>
+                    <input appColorChanger class="submit" type="submit" value="Login">
+                    <span style="font-size:10pt ; color: rgb(127, 127, 127); margin-left: 4%;">email: test&#64;gmail.com password:123</span>
+                </form>
+            
+                
+            </div>
+          </div>
+          <div  class="flip-card-back">
+            <div class="container">
+                <h1>Sign up</h1>
+                <form class="form" [formGroup]="signUpForm" (ngSubmit)="signUp()"  id="signUp-form">
+                    <div>
+                        <input placeholder="First Name" type="text" formControlName="firstName" >
+                        <span *ngIf="signUpForm.controls['firstName'].touched && !signUpForm.controls['firstName'].valid" class="errorMessage">First name can't be empty</span>
+                    </div>
+                    <div>
+                    <input placeholder="Last Name" type="text" formControlName="lastName" >
+                    <span *ngIf="signUpForm.controls['lastName'].touched && !signUpForm.controls['lastName'].valid" class="errorMessage">Last name can't be empty</span>
+                    </div>
+                    <div>
+                    <input autocomplete="email" placeholder="example@email.com" type="text" formControlName="email" >
+                    <span *ngIf="signUpForm.controls['email'].touched && !signUpForm.controls['email'].valid" class="errorMessage">Invalid email</span>
+                    </div>
+                    <div>
+                    <input autocomplete="current-password" placeholder="Your password" type="password" formControlName="password">
+                    <span *ngIf="signUpForm.controls['password'].touched && !signUpForm.controls['password'].valid" class="errorMessage">Invalid password</span>
+
+                    </div>
+                    <input appColorChanger class="submit" type="submit" value="Sing up">
+            
+                </form>
+            
+                
+            </div>
+          </div>
+        </div>
+    
+</div>

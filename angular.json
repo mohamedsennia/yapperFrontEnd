@@ -23,11 +23,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+        
             "outputPath": "dist/messenger-app-front",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "src/polyfills.ts"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -39,7 +41,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [ ]
           },
           "configurations": {
             "production": {

@@ -1,0 +1,157 @@
+:host{
+    height:100vh;
+    width: calc(100vw - (100vw - 100%    ) );
+    display: flex;
+  
+}
+#left-side{
+    width: 60%;
+    height: 100%;
+    background-color: #d0effa;
+}
+#logo{
+    text-align: center;
+    margin: auto;
+    color: white;
+    font-size: 3rem;
+    display: inline-block;
+    width: 50%;
+    margin: 5% 25% 5% 25%;
+}
+#right-side{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #05212A;
+    font-family: sans-serif;
+    height: 100%;
+    width: 40%;
+}
+
+.container{
+    border-radius: 25px;
+
+  height: 100%;
+    
+    background-color: #d0effa;
+    color: #315983;
+   padding: 1%;
+}
+h1{margin-left: 15px;margin-top: 10%;}
+.form{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    justify-content: space-between;
+    margin-top: 10%;
+}
+#login-form{
+   
+    height: 50%;
+  
+}
+#signUp-form{
+    height: 65%;
+}
+form div{
+    width: 100%;
+    aspect-ratio: 9;
+   
+}
+.errorMessage{
+    color: red ;
+    font-size: 9pt;
+    float: left;
+    margin-top: 1%;
+}
+input{
+    width: 100%;
+    aspect-ratio: 8;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 2%;
+    color: black;
+    background-color: white ;
+    
+}
+.submit{
+    background-color: #4ac8f7 !important;
+    color:white;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    aspect-ratio: 4;
+    padding: 0;
+}
+.error{
+    color: red;font-size: 0.8em;
+}
+
+
+
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+.label {
+    font-size: 12px;
+}
+
+#switch-section{
+    height: 10%;
+    display: flex;
+}
+#switch-section span{
+    width: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    
+}
+.active{
+background-color: #4ac8f7;
+color: white;
+}
+.flip-card {
+ 
+background-color: #D0EFFA;
+width: 80%;
+aspect-ratio: 0.8;
+border-radius: 25px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 25px;
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-front {
+    border-radius: 25px;
+    color: black;
+  }
+  
+  .flip-card-back {
+   
+    color: white;
+    transform: rotateY(180deg);
+  }

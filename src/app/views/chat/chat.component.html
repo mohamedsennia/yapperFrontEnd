@@ -1,0 +1,33 @@
+<div id="container">
+    <div id="usersList">
+        <ul>
+            <li ><h2>Messenger</h2></li>
+            <li><input type="text" (keyup)="search()" placeholder="Search" [(ngModel)]="searchString"></li>
+            <li  *ngFor="let contact of contacts">
+                <div class="user" [routerLink]="['/conversation/'+contact.getId()]">
+                    <img src="https://generated.vusercontent.net/placeholder-user.jpg" alt="user image">
+                    <div>
+                        <span class="usernName">{{contact.getLastName()+" "+ contact.getFirstName()}}</span><br>
+                        <span  *ngIf="contact.getMessage()!=null&&contact.getMessage().getConent().length<=30">{{contact.getMessage().getConent()}}</span><span *ngIf="contact.getMessage().getConent().length>30">{{contact.getMessage().getConent().slice(0,29)+"..."}}</span>
+                        <span *ngIf="contact.getMessage()==null">"Start a conversation now"</span>
+                    </div>
+                </div>   
+            </li>
+           
+
+        </ul>
+       
+    </div>
+    <div id="conversation">
+        <div id="conversation-header"> <img src="https://generated.vusercontent.net/placeholder-user.jpg" alt="user image"><h3 class="usernName">{{targetUser.getLastName()+" " +targetUser.getFirstName()}}</h3></div>
+        <div id="messages">
+            <div *ngFor="let message of conversation"  [ngClass]="{'message sent': message.getSenderId() === userService.getCurrentId(), 'message received' : message.getRecipientId() === userService.getCurrentId()}">{{message.getConent()}}</div>
+          
+        </div>
+        <div id="new-message">
+            <input (keyup.enter)="sendMessage()" type="text" [(ngModel)]="newMessage" placeholder="new message">
+
+        </div>
+    </div>
+
+</div>
