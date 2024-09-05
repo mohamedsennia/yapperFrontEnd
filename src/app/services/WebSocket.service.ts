@@ -21,7 +21,6 @@ export class WebSocketService {
          messageService.addMessage(new Message(tempMessage['id'],tempMessage['content'],new Date(tempMessage['time']),tempMessage['senderId'],tempMessage['recipientId']))
         })
         
-        
       },
       debug: (str) => {
         console.log(new Date(), str);
