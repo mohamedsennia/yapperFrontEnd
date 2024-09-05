@@ -1,23 +1,24 @@
 :host{
     display: block;
     width: calc(100vw - (100vw - 100%));
-    height: 100svh;
+    height: 94vh;
+    margin-bottom: 4%;
 }
 #container{
-    width: 80%;
-    height: 90%;
-    margin: 1% auto ;
-    border: 2px #98aac0 solid;
-    border-radius: 25px;
+    width: 100%;
+    height: 99%;
+   
+
     display: flex;
     overflow: hidden;
+    
 }
 #usersList{
-width: calc(30% - 1px);
+width: calc(25% - 1px);
 height: 100%;
-border-right: 1px #98aac0 solid;
-overflow-y: scroll;
 
+overflow-y: scroll;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 ul{padding: 4% 0% 0% 2%;
     list-style: none;
@@ -30,11 +31,23 @@ li{
     overflow-wrap: anywhere;
 }
 #conversation{
-width: calc(70% - 1px);
+width: calc(75% - 1px);
 height: 100%;
 border-left: 1px #98aac0 solid;
 
 }
+#noConversation{
+    width: calc(75% - 1px);
+height: 100%;
+border-left: 1px #98aac0 solid;
+
+}
+.adivce-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 input{
     background-color: #F0F7FF;
     border: 1px #98aac0 solid;
@@ -84,37 +97,48 @@ img{
     padding:0% 3%;
     height: 75%
 }
-.message{
+#noMessages{
+    padding:0% 3%;
+    height: 75%
+}
+.sent{
+float: right;
+display: block;
+background-color: #C9EBF7;
+max-width: 50%;
+width: fit-content;
+margin: 5px;
+padding: 1% 3%;
+border-radius: 25px;
+overflow-wrap: anywhere;
+clear: both;
+}
+.received{
+    clear: both;
+    background-color: #E6F2FF;
     max-width: 50%;
     width: fit-content;
     margin: 5px;
     padding: 1% 3%;
     border-radius: 25px;
     overflow-wrap: anywhere;
-}
-.sent{
-float: right;
-display: block;
-background-color: #C9EBF7;
-}
-.received{
     clear: both;
-    background-color: #E6F2FF;
 }
 #new-message{
     height: 10%;
  
-    background-color: #b3cce8;
+    background-color: #2C3E50;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 #new-message input{
     margin: auto;
     display: block;
     width: 50%;
-    height: 30%;
+    height: 10%;
 }
 @media screen  and (max-width:600px){
     .user{

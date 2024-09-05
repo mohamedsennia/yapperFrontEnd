@@ -7,10 +7,13 @@ import { UserService } from "./UserService";
 @Injectable({"providedIn":"root"})
 export class MessageService{
      messagesSubject:Subject<Message[]>
+     messageNotification:Subject<boolean>
     private messages:Message[]
     private user2Id:number;
+
 constructor(private apiService:ApiService,private userService:UserService){
     this.messagesSubject=new Subject<Message[]>()
+    this.messageNotification=new Subject<boolean>()
     this.messages=[]
 
 }
@@ -32,6 +35,6 @@ addMessage(message:Message){
         this.messages.push(message)
         this.messagesSubject.next(this.messages)
     }
-        
+    this.messageNotification.next(true)
 }
 }

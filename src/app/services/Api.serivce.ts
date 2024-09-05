@@ -5,7 +5,7 @@ import { map } from "rxjs";
 
 @Injectable({"providedIn":"root"})
 export class ApiService{
-    private link="http://localhost:8080/";
+    private link="https://yapper-production.up.railway.app:8080/";
     private apiLink=this.link+"api";
     private user:User;
     constructor(private httpClient:HttpClient){
@@ -64,6 +64,16 @@ export class ApiService{
         .set('Authorization', `Bearer `+this.user.getKey());
         return this.httpClient.get<any[]>(this.apiLink+"/Utilisateur/getOtherUsers/"+this.user.getId(),{headers:headers_object})
       }
+      getConversations(){
+        var headers_object = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer `+this.user.getKey());
+        return this.httpClient.get<any[]>(this.apiLink+"/Utilisateur/getConversations/"+this.user.getId(),{headers:headers_object})
+      }
+      getUser(id:number){
+        var headers_object = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer `+this.user.getKey());
+        return this.httpClient.get<any>(this.apiLink+"/Utilisateur/getUser/"+id,{headers:headers_object})
+      }
       getConversation(user2:number){
         var headers_object = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', `Bearer `+this.user.getKey());
@@ -74,4 +84,5 @@ export class ApiService{
         .set('Authorization', `Bearer `+this.user.getKey());
         return this.httpClient.get<any[]>(this.apiLink+"/Utilisateur/search/"+this.user.getId()+"/"+subName)
       }
+      
 }

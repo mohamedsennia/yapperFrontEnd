@@ -1,0 +1,20 @@
+:host{
+    height: 6vh;
+    width: 94%;
+    background: #2C3E50;
+    display: block;
+    color: #F0F7FF;
+    padding: 1% 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+span{
+    font-size: 1.2rem;
+    font-weight: bold;
+
+}
+span, h1{
+    cursor: pointer;
+}

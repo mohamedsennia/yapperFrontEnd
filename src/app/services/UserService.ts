@@ -54,6 +54,21 @@ export class UserService{
   return contacts
  }));
  }
+ getConversations(){
+  return this.apiService.getConversations().pipe(map(users=>{
+ 
+    let contacts:User[]=[]
+    for(let user of users){
+      let message:Message=null;
+      if(user['messageDTO']!=null){
+        message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
+      }
+      contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","","",message))
+    }
+    
+    return contacts
+   }));
+ }
  getUsersLike(subName:string){
  return this.apiService.getUsersLike(subName).pipe(map(users=>{
  
@@ -68,5 +83,15 @@ export class UserService{
   
   return contacts
  }));
+ }
+ getUser(id:number){
+  
+  return this.apiService.getUser(id).pipe(map(user=>{
+    let message:Message=null;
+    if(user['messageDTO']!=null){
+      message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
+    }
+   return new User(user['id'],user['firstName'],user['lastName'],"","","",message)
+  }))
  }
 }

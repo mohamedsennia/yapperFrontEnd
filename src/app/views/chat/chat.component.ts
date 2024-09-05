@@ -25,19 +25,33 @@ export class ChatComponent implements OnInit,OnDestroy{
     this.conversation=[]
     this.newMessage="";
     this.searchString=""
+    this.targetUser=null
   }
   ngOnInit(): void {
   this.subscribtions.push(
-    this.userService.getOtherUsers().subscribe(contacts=>{
+    this.userService.getConversations().subscribe(contacts=>{
+     
       this.contacts=contacts
       this.subscribtions.push(this.activatedRoute.params.subscribe((params)=>{
         
         if(params['id']==0){
+           if(!(contacts.length>0)){
+        return 0
+      }
           this.router.navigate(['/conversation/'+contacts[0].getId()])// to be changed for last conversation
         }
-        for(let conatact of contacts){
-          if(conatact.getId()==+params['id']){
-            this.targetUser=conatact
+      
+          this.subscribtions.push(
+            this.userService.getUser(+params['id']).subscribe(user=>{
+           
+              
+              this.targetUser=user
+            })
+          )
+       
+        for(let contact of contacts){
+          if(contact.getId()==+params['id']){
+            this.targetUser=contact
             break
           }
         }
@@ -48,9 +62,13 @@ export class ChatComponent implements OnInit,OnDestroy{
               this.conversation=messages
              this.resortConversation()
             }))
+            this.subscribtions.push(this.messageSerivce.messageNotification.subscribe(()=>{
+              this.resortConversation()
+            }))
             
           })
         )
+        return 1
       }))
       
     })
@@ -74,21 +92,18 @@ export class ChatComponent implements OnInit,OnDestroy{
    }
   }
   resortConversation(){
-    for(let i=0;i<this.contacts.length;i++){
-      if(this.contacts[i].getId()==this.userService.getCurrentId()||this.targetUser.getId()==this.contacts[i].getId()){
-     let tempContact=this.contacts[i]
-     this.contacts.splice(i,1)
-      tempContact.setMessage(this.conversation[this.conversation.length-1])
-     this.contacts.push(tempContact)
-     
-      }
-    }
+  this.subscribtions.push(
+    this.userService.getConversations().subscribe(contacts=>{
+      this.contacts=contacts
+         })
+  )
   }
   search(){
     if(this.searchString!=""){
       this.subscribtions.push(
-        this.userService.getUsersLike(this.searchString).subscribe(contacts=>{
+        this.userService.getUsersLike(this.searchString.toLowerCase()).subscribe(contacts=>{
           this.contacts=contacts
+          console.log(contacts  )
         })
       )
     }else{

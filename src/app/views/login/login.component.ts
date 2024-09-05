@@ -49,7 +49,7 @@ toggleFlip(side:string){
 }
 signUp(){
  if(this.signUpForm.valid){
- this.userService.signUp(new User(null,this.signUpForm.value["firstName"],this.signUpForm.value["lastName"],this.signUpForm.value['email'],this.signUpForm.value['password'],"",null)).subscribe((param)=>{
+ this.userService.signUp(new User(null,this.signUpForm.value["firstName"].toLowerCase(),this.signUpForm.value["lastName"].toLowerCase(),this.signUpForm.value['email'].toLowerCase(),this.signUpForm.value['password'],"",null)).subscribe((param)=>{
    this.router.navigate(['/'])
 
  },err=>{
@@ -65,7 +65,7 @@ login(){
 
  if(this.loginForm.valid){
    
-   this.userService.loggIn(new User(null,"","",this.loginForm.value['email'],this.loginForm.value['password'],"",null)).subscribe((param)=>{
+   this.userService.loggIn(new User(null,"","",this.loginForm.value['email'].toLowerCase(),this.loginForm.value['password'],"",null)).subscribe((param)=>{
      this.router.navigate(['/'])
 
    },err=>{

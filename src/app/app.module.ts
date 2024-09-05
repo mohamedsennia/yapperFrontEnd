@@ -9,12 +9,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './views/login/login.component';
 import { ChatComponent } from './views/chat/chat.component';
+import { HeaderComponent } from './views/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
