@@ -13,7 +13,7 @@ export class WebSocketService {
 
   constructor(private userService:UserService,private messageService:MessageService) {
     this.client = new Client({
-      webSocketFactory: () => new SockJS('https://empowering-appreciation-production.up.railway.app/messenger'), // Use SockJS as fallback
+      webSocketFactory: () => new SockJS('https://yapper-production.up.railway.app/messenger'), // Use SockJS as fallback
       onConnect: () => {
         this.client.subscribe("/user/"+this.userService.getCurrentId()+"/topic/messages",(message)=>{
          let tempMessage:Message=JSON.parse(message.body)
