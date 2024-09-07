@@ -5,7 +5,7 @@ import { map } from "rxjs";
 
 @Injectable({"providedIn":"root"})
 export class ApiService{
-    private link="https://yapper-production.up.railway.app:8080/";
+    private link="https://melodious-prosperity-production.up.railway.app/";
     private apiLink=this.link+"api";
     private user:User;
     constructor(private httpClient:HttpClient){
