@@ -1,0 +1,41 @@
+:host{
+    height: 100%;
+
+    display: block;
+}
+div{
+    display: flex;
+    flex-direction: column;
+    background-color: #18181B;
+    color: #9CA3AF;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif
+}
+h1{
+    color: #CF6ED8;
+    margin-bottom: 40px;
+}
+p{
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+span{
+    display: flex;
+    margin-bottom: 15px;
+}
+a{
+    color: #9CA3AF;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin:0px 6px;
+}
+i{
+    margin-left: 4px;
+}
