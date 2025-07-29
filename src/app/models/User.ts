@@ -7,7 +7,7 @@ export class User{
       private email:string,
       private password:string,
       private key:string,
-    private message:Message
+
     ){}
    
       getId(){
@@ -46,10 +46,5 @@ export class User{
       setKey(key:string){
        this.key=key
       }
-      getMessage(){
-        return this.message
-      }
-      setMessage(message:Message){
-        this.message=message
-      }
+
    }

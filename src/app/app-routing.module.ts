@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
 import { ChatComponent } from './views/chat/chat.component';
 import { authGuard } from './auth-guard.service';
+import { FeedComponent } from './views/feed/feed.component';
 
 const routes: Routes = [{path:"login",component:LoginComponent},
-  {path:"",redirectTo:"conversation/0",pathMatch:"full"},
+  {path:"",component:FeedComponent,pathMatch:"full"},
   {path:"conversation/:id",component:ChatComponent,canActivate:[authGuard]},
   {path:"**",redirectTo:"conversation/0"}
+  
 ];
 
 @NgModule({

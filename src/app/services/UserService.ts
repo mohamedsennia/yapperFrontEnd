@@ -13,7 +13,7 @@ export class UserService{
  constructor(private apiService:ApiService){
   if(localStorage.getItem("userId")!=null){
        
-  this.user=new User(+localStorage.getItem("userId"),"","","","",localStorage.getItem("userKey"),null)
+  this.user=new User(+localStorage.getItem("userId"),"","","","",localStorage.getItem("userKey"))
    
 }else{
     
@@ -23,12 +23,15 @@ export class UserService{
  getCurrentId(){
   return this.user.getId()
  }
+ getUserName(){
+  return this.user.getFirstName()+" "+this.user.getLastName()
+ }
  isLoggedIn(){
     return this.user!=null
  }
  loggIn(user:User){
    this.user=user
-  
+ 
    return this.apiService.loggIn(user)
  }
  signUp(user:User){
@@ -48,7 +51,7 @@ export class UserService{
     if(user['messageDTO']!=null){
       message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
     }
-    contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","","",message))
+    contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
   }
   
   return contacts
@@ -63,7 +66,7 @@ export class UserService{
       if(user['messageDTO']!=null){
         message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
       }
-      contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","","",message))
+      contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
     }
     
     return contacts
@@ -78,7 +81,7 @@ export class UserService{
     if(user['messageDTO']!=null){
       message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
     }
-    contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","","",message))
+    contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
   }
   
   return contacts
@@ -91,7 +94,7 @@ export class UserService{
     if(user['messageDTO']!=null){
       message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
     }
-   return new User(user['id'],user['firstName'],user['lastName'],"","","",message)
+   return new User(user['id'],user['firstName'],user['lastName'],"","","")
   }))
  }
 }

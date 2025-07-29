@@ -5,13 +5,13 @@ import { map } from "rxjs";
 
 @Injectable({"providedIn":"root"})
 export class ApiService{
-    private link="https://yapper-production.up.railway.app/";
+    private link="http://localhost:8080/";
     private apiLink=this.link+"api";
     private user:User;
     constructor(private httpClient:HttpClient){
         if(localStorage.getItem("userId")!=null){
              
-          this.user=new User(+localStorage.getItem("userId"),"","","","",localStorage.getItem("userKey"),null)
+          this.user=new User(+localStorage.getItem("userId"),"","","","",localStorage.getItem("userKey"))
            
         }else{
             
@@ -21,11 +21,11 @@ export class ApiService{
       loggIn(user:User){
 
         return  this.httpClient.post(this.apiLink+"/auth/logIn",{"userEmail":user.getEmail(),"password":user.getPassword()}).pipe(map(param=>{
-          
+         
           this.user=user
           this.user.setKey(param['token'])
           this.user.setId(param['id'])
-          
+          localStorage.setItem("userName",param['userName'])
           localStorage.setItem("userId",this.user.getId().toString())
           localStorage.setItem("userKey",this.user.getKey())
         }))
@@ -36,9 +36,8 @@ export class ApiService{
           "lastName":user.getLastName(),
           "email":user.getEmail(),
           "password":user.getPassword(),
-          "role":"User",
-          "messagesReceived":[],
-          "messagesSent":[]
+
+
   
         })
         return this.httpClient.post(this.apiLink+"/auth/signUp",{
@@ -46,9 +45,7 @@ export class ApiService{
           "lastName":user.getLastName(),
           "email":user.getEmail(),
           "password":user.getPassword(),
-          "role":"User",
-          "messagesReceived":[],
-          "messagesSent":[]
+
   
         }).pipe(map(param=>{
           this.user=user

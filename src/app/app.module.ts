@@ -10,13 +10,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './views/login/login.component';
 import { ChatComponent } from './views/chat/chat.component';
 import { HeaderComponent } from './views/header/header.component';
+import { FeedComponent } from './views/feed/feed.component';
+import { InputComponent } from './components/input/input.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ChatComponent,
-    HeaderComponent
+    HeaderComponent,
+    FeedComponent,
+    InputComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

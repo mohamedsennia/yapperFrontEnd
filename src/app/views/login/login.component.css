@@ -77,12 +77,16 @@ form div{
 input{
     width: 100%;
     aspect-ratio: 8;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
     padding-left: 2%;
     color: black;
     background-color: white ;
     
+}
+input:focus{
+    outline: none;
+    box-shadow:  0px 0px 3px 3px #90dbf7 ;
 }
 .submit{
     background-color: #4ac8f7 !important;

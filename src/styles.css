@@ -1,7 +1,16 @@
-*{
-    margin: 0;
-    padding: 0;
+@import "tailwindcss";
+
+
+@theme {
+
+ --box-shadow-inputFocus:0px 0px 3px 3px #90dbf7 ;
 }
 body{
     background-color: #F0F7FF;
+
+}
+html,body{
+    min-height: 100vh;
+    min-width: 100vh;
+   
 }
