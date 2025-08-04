@@ -5,6 +5,9 @@
 
  --box-shadow-inputFocus:0px 0px 3px 3px #90dbf7 ;
 }
+*{
+    font-family: sans-serif;
+}
 body{
     background-color: #F0F7FF;
 

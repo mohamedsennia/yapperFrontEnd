@@ -1,0 +1,22 @@
+<div class="flex items-center justify-between w-full ">
+    <div class="flex items-baseline flex-col ">
+        <h4 class="font-semibold">{{post.profile.ownerLastName +" "+post.profile.ownerLastName}} </h4><span class="text-gray-500 text-[12px] pl-1 font-semibold">18h35</span>
+    </div>
+    <div class="flex items-center">
+        <svg   xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"   fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-heart-plus cursor-pointer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 20l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.96 6.053" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
+        <span class="text-sm text-gray-500">100</span>
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bubble-plus cursor-pointer ml-4" (click)="showComments()"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12.4 19a4.2 4.2 0 0 1 -1.57 -.298l-3.83 2.298v-3.134a2.668 2.668 0 0 1 -1.795 -3.773a4.8 4.8 0 0 1 2.908 -8.933a5.335 5.335 0 0 1 9.194 1.078a5.333 5.333 0 0 1 4.45 6.89" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
+        <span class="text-sm text-gray-500">100</span>    
+    </div>
+</div>
+<p class="py-3 px-3 text-base text-gray-700">
+    
+</p>
+<div class="border-t border-gray-300 pt-4 flex flex-col" *ngIf="commentsShowen">
+
+    <app-input width="w-full" placeholder="Yapp back"></app-input>
+    
+    <app-reply ></app-reply>
+    <app-reply ></app-reply>
+    <span class="text-gray-500 text-[12px] mt-2" #scrollTarget>Load more...</span>
+</div>

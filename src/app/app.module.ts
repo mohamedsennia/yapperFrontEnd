@@ -13,6 +13,8 @@ import { HeaderComponent } from './views/header/header.component';
 import { FeedComponent } from './views/feed/feed.component';
 import { InputComponent } from './components/input/input.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PostComponent } from './components/post/post.component';
+import { ReplyComponent } from './components/reply/reply.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HeaderComponent,
     FeedComponent,
     InputComponent,
-    NavbarComponent
+    NavbarComponent,
+    PostComponent,
+    ReplyComponent
   ],
   imports: [
     BrowserModule,

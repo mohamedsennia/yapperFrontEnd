@@ -8,7 +8,8 @@ import { FeedComponent } from './views/feed/feed.component';
 const routes: Routes = [{path:"login",component:LoginComponent},
   {path:"",component:FeedComponent,pathMatch:"full"},
   {path:"conversation/:id",component:ChatComponent,canActivate:[authGuard]},
-  {path:"**",redirectTo:"conversation/0"}
+  {path:"**",redirectTo:"conversation/0"},
+  
   
 ];
 
