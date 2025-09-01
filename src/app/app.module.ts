@@ -15,28 +15,29 @@ import { InputComponent } from './components/input/input.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostComponent } from './components/post/post.component';
 import { ReplyComponent } from './components/reply/reply.component';
+import { ButtonComponent } from './components/button/button.component';
+import { UserProfileComponent } from './views/user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    ChatComponent,
-    HeaderComponent,
-    FeedComponent,
-    InputComponent,
-    NavbarComponent,
-    PostComponent,
-    ReplyComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        LoginComponent,
+        ChatComponent,
+        HeaderComponent,
+        FeedComponent,
+        InputComponent,
+        NavbarComponent,
+        PostComponent,
+        ReplyComponent,
+        ButtonComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

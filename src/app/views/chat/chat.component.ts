@@ -8,9 +8,10 @@ import { Message } from '../../models/Message';
 import { WebSocketService } from '../../services/WebSocket.service';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrl: './chat.component.css'
+    selector: 'app-chat',
+    templateUrl: './chat.component.html',
+    styleUrl: './chat.component.css',
+    standalone: true
 })
 export class ChatComponent implements OnInit,OnDestroy{
   private subscribtions:Subscription[]
@@ -45,7 +46,7 @@ export class ChatComponent implements OnInit,OnDestroy{
             this.userService.getUser(+params['id']).subscribe(user=>{
            
               
-              this.targetUser=user
+              // this.targetUser=user
             })
           )
        
@@ -102,7 +103,7 @@ export class ChatComponent implements OnInit,OnDestroy{
     if(this.searchString!=""){
       this.subscribtions.push(
         this.userService.getUsersLike(this.searchString.toLowerCase()).subscribe(contacts=>{
-          this.contacts=contacts
+          // this.contacts=contacts
           console.log(contacts  )
         })
       )

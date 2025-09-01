@@ -1,5 +1,13 @@
 <app-navbar ></app-navbar>
+<div>
+    <div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl p-4 mb-6 w-[650px]">
+    <app-input [(content)]="newPostContent" size="area" width="w-full" placeholder="what do you wanna yapp about"></app-input>
+    <div class="mt-4 w-full flex justify-end">
+        <app-button (click)="sendPost()" text="Post"></app-button>
+    </div>
+</div>
 <div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl ">
-    <app-post *ngFor="let post of posts" class="w-150 p-6 border border-gray-200 rounded-2xl shadow  bg-white m-6 block"></app-post>
+    <app-post  *ngFor="let post of posts" [post]="post" class="w-150 p-6 border border-gray-200 rounded-2xl shadow  bg-white m-6 block"></app-post>
 
+</div>
 </div>

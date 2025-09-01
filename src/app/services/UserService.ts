@@ -3,6 +3,7 @@ import { User } from "../models/User";
 import { ApiService } from "./Api.serivce";
 import { map } from "rxjs";
 import { Message } from "../models/Message";
+import { SuggestionItem } from "../models/front.models/SuggestionItem";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UserService{
  constructor(private apiService:ApiService){
   if(localStorage.getItem("userId")!=null){
        
-  this.user=new User(+localStorage.getItem("userId"),"","","","",localStorage.getItem("userKey"))
+  this.user=new User(+localStorage.getItem("userId"),undefined,undefined,undefined,undefined,undefined,localStorage.getItem("userKey"))
    
 }else{
     
@@ -51,7 +52,7 @@ export class UserService{
     if(user['messageDTO']!=null){
       message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
     }
-    contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
+    // contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
   }
   
   return contacts
@@ -66,7 +67,7 @@ export class UserService{
       if(user['messageDTO']!=null){
         message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
       }
-      contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
+      // contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
     }
     
     return contacts
@@ -74,27 +75,23 @@ export class UserService{
  }
  getUsersLike(subName:string){
  return this.apiService.getUsersLike(subName).pipe(map(users=>{
- 
-  let contacts:User[]=[]
-  for(let user of users){
-    let message:Message=null;
-    if(user['messageDTO']!=null){
-      message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
+    let suggestedUsers:SuggestionItem[]=[]
+    for(let user of users){
+       suggestedUsers.push(new SuggestionItem(user.id,user.lastName+" "+user.firstName,user.email))
     }
-    contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
-  }
-  
-  return contacts
+
+
+  return suggestedUsers
  }));
  }
  getUser(id:number){
   
   return this.apiService.getUser(id).pipe(map(user=>{
-    let message:Message=null;
-    if(user['messageDTO']!=null){
-      message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
-    }
-   return new User(user['id'],user['firstName'],user['lastName'],"","","")
+  console.log(user)
+    return new User(user.id,user.firstName,user.lastName,user.email,user.profile,undefined,undefined,user.subscribers,user.subscribtions,user.me,user.followed)
   }))
+ }
+ toggleFollow(id:number){
+return  this.apiService.toggleFollow(id)
  }
 }

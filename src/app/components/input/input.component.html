@@ -1,9 +1,16 @@
 
-<div class="px-3 py-2 h-12 rounded-2xl border border-gray-300 bg-gray-50 text-gray-700 placeholder:text-gray-400 cursor-text inputFocus flex items-center relative hh" [ngClass]="width">
+<div  [class]="'px-3 py-2  rounded-2xl border border-gray-300 bg-gray-50 text-gray-700 placeholder:text-gray-400 cursor-text inputFocus flex items-center relative hh '+width "[ngClass]="{'h-12' : size=='normal','h-36':size=='area','z-50':suggestions.length>0,}" >
     <svg *ngIf="icon=='search'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute  left-2">
   <circle cx="11" cy="11" r="8"></circle>
   <path d="m21 21-4.3-4.3"></path>
     </svg>
 
-    <input [type]="type" class="border-none w-full h-full outline-none  "[ngClass]="{'pl-6': icon}" [placeholder]="placeholder">
+    <input  [(ngModel)]="content"  (keyup)="keyUp($event)" *ngIf="size=='normal'"  [type]="type" class="border-none w-full h-full outline-none  "[ngClass]="{'pl-6': icon}" [placeholder]="placeholder">
+    <textarea [(ngModel)]="content" (ngModelChange)="contentChange.emit($event)" [placeholder]="placeholder" class="border-none w-full h-full outline-none  resize-none pt-2" *ngIf="size=='area'"></textarea>
+    <div *ngIf="suggestions.length>0" class="w-full border border-gray-200 bg-gray-50 shadow rounded-lg absolute top-[105%] left-0 z-10 max-h-64 overflow-auto"  >
+      <div *ngFor="let suggestion of suggestions" class="p-3 hover:bg-gray-100 flex flex-col cursor-pointer " (click)="suggestions=[];content='';" [routerLink]="['/yapper/'+suggestion.id]">
+        <span class="text-md text-gray-700 font-medium">{{suggestion.title}}</span>
+        <span class="text-xs text-gray-500 ml-1">{{suggestion.subtitle}}</span>
+      </div>
+    </div>
 </div>    

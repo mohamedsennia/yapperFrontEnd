@@ -1,27 +1,29 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/UserService';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
-  animations:[
-    trigger('flipAnimation',[
-      state('active', style({
-        transform: 'rotateY(180deg)'
-      })),
-      state('inactive', style({
-        transform: 'rotateY(0)'
-      })),
-      transition('active => inactive', animate('600ms ease-out')),
-      transition('inactive => active', animate('600ms ease-in'))
-    ])
-  ]
-
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    animations: [
+        trigger('flipAnimation', [
+            state('active', style({
+                transform: 'rotateY(180deg)'
+            })),
+            state('inactive', style({
+                transform: 'rotateY(0)'
+            })),
+            transition('active => inactive', animate('600ms ease-out')),
+            transition('inactive => active', animate('600ms ease-in'))
+        ])
+    ],
+    standalone: true,
+    imports: [NgClass, ReactiveFormsModule, NgIf]
 })
 export class LoginComponent implements OnInit{
   flip: string

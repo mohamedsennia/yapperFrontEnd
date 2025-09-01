@@ -1,4 +1,4 @@
-<div class="flex items-center">
+<div class="flex items-center cursor-pointer" [routerLink]="['/']">
 <svg width="40" height="40" viewBox="10 0 80 60" xmlns="http://www.w3.org/2000/svg">
   <path d="M15 20C15 14.477 19.477 10 25 10H55C60.523 10 65 14.477 65 20V40C65 45.523 60.523 50 55 50H28L15 63V20Z" fill="#96dcf5" stroke="#031c25" stroke-width="4" stroke-linejoin="round"/>
   <path d="M72 30C75 33 75 37 72 40" stroke="#000" stroke-width="4" stroke-linecap="round"/>
@@ -6,7 +6,7 @@
 </svg>
 <h2 class="ml-2 text-2xl font-semibold text-[#4acdfb]">YAPPER</h2>
 </div>
-<app-input width="w-112" placeholder="Find other yappers.." icon="search"></app-input>
+<app-input [suggestions]="users" (contentChange)="typing($event)"  width="w-150" placeholder="Find other yappers.." icon="search"></app-input>
 <div>
     <div class="cursor-pointer flex items-end relative" (click)="toggleMenu()" (mouseleave)="closeMenu()">
     <span class="text-l font-medium text-gray-700 mr-2">{{getUserName()}}</span>

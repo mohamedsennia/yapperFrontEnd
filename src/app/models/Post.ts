@@ -2,8 +2,9 @@ import { PostTypes } from "../enums/PostTypes";
 import { Profile } from "./Profile";
 
 export class Post{
+  
     
-    constructor(private _id: number,private _content: string,private _date: Date,private _postType: PostTypes,private _profile: Profile,private _commentsCount: number,private _likesCount: number){}
+    constructor(private _id: number,private _content: string,private _date: Date,private _postType: PostTypes,private _profile: Profile,private _commentsCount: number,private _likesCount: number,private _liked: boolean){}
     public get id(): number {
         return this._id;
     }
@@ -45,5 +46,11 @@ export class Post{
     }
     public set likesCount(value: number) {
         this._likesCount = value;
+    }
+      public get liked(): boolean {
+        return this._liked;
+    }
+    public set liked(value: boolean) {
+        this._liked = value;
     }
 }

@@ -4,6 +4,18 @@
 @theme {
 
  --box-shadow-inputFocus:0px 0px 3px 3px #90dbf7 ;
+  --color-blue-25:  #F4FCFE;
+  --color-blue-50:  #ECFAFE;
+  --color-blue-100: #D4F2FC;
+  --color-blue-200: #B6E7F9;
+  --color-blue-300: #96DCF5; 
+  --color-blue-400: #75C7EA;
+  --color-blue-500: #52B1DD;
+  --color-blue-600: #2F9ACF;
+  --color-blue-700: #1A80B1;
+  --color-blue-800: #11648B;
+  --color-blue-900: #0C4A68;
+  --color-blue-950: #082F46;
 }
 *{
     font-family: sans-serif;
