@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { ButtonComponent } from "../button/button.component";
 import { UserService } from '../../services/UserService';
 import { CommonModule } from '@angular/common';
+import { Profile } from '../../models/Profile';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-user-card',
@@ -11,14 +13,22 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.css'
 })
-export class UserCardComponent {
- @Input() user!:User
- constructor(private userService:UserService){
+export class UserCardComponent implements OnInit{
+ @Input() profile!:Profile
+ isSet:boolean=false
+ constructor(private profileService:ProfileService){
   
  }
+  ngOnInit(): void {
+    this.isSet=true
+    console.log(this.profile)
+   
+   
+  }
+ 
  toggleFollow(){
-  this.userService.toggleFollow(this.user.getId()).subscribe(()=>{
-    this.user.isFollowed=!this.user.isFollowed
+  this.profileService.toggleFollow(this.profile.id).subscribe(()=>{
+    this.profile.isFollowed=!this.profile.isFollowed
   })
  }
 }

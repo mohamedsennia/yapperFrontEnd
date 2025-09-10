@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
     standalone: true,
     imports: [NgIf, InputComponent, ReplyComponent,FormsModule,CommonModule]
 })
-export class PostComponent  implements OnDestroy{
+export class PostComponent  implements OnInit, OnDestroy{
  commentsShowen:boolean
  @Input() post:Post
  @ViewChild('scrollTarget',{static:false})scrollTarget!:ElementRef
@@ -30,6 +30,9 @@ export class PostComponent  implements OnDestroy{
   this.page=0
   this.subscriptions=new Map<string,Subscription>()
  }
+  ngOnInit(): void {
+    console.log(this.post)
+  }
  
   
  showComments(){

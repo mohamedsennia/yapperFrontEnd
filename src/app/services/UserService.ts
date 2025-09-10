@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { User } from "../models/User";
-import { ApiService } from "./Api.serivce";
+
 import { map } from "rxjs";
 import { Message } from "../models/Message";
 import { SuggestionItem } from "../models/front.models/SuggestionItem";
+import { ConnectionService } from "./connection.service";
 
 
 @Injectable({
@@ -11,10 +12,12 @@ import { SuggestionItem } from "../models/front.models/SuggestionItem";
 })
 export class UserService{
  private user:User
- constructor(private apiService:ApiService){
-  if(localStorage.getItem("userId")!=null){
-       
-  this.user=new User(+localStorage.getItem("userId"),undefined,undefined,undefined,undefined,undefined,localStorage.getItem("userKey"))
+ constructor(private connectionService:ConnectionService){
+   let userDetails:any=localStorage.getItem("userDetails")
+        if(userDetails!=null){
+             userDetails=JSON.parse(userDetails)
+       this.user=new User(+userDetails.userId,undefined,undefined,undefined,+userDetails.profileId,undefined,userDetails.userKey)
+
    
 }else{
     
@@ -31,67 +34,51 @@ export class UserService{
     return this.user!=null
  }
  loggIn(user:User){
-   this.user=user
+
  
-   return this.apiService.loggIn(user)
+   return this.connectionService.post("/auth/logIn",{"userEmail":user.getEmail(),"password":user.getPassword()}).pipe(map(param=>{
+        
+            this.user=new User(param['userId'],undefined,undefined,undefined,param['profileId'],undefined,param['token'])
+          
+            let userDetails={
+              "userName":param['userName'],
+              "userId":param['userId'],
+              "userKey":param['token'],
+              "profileId":param["profileId"]
+            }
+            localStorage.setItem("userDetails",JSON.stringify(userDetails))
+
+           return this.user
+        }))
  }
  signUp(user:User){
-  this.user=user
-  return this.apiService.signUp(user);
+  
+return  this.connectionService.post("/auth/signUp",{
+          "firstName":user.getFirstName(),
+          "lastName":user.getLastName(),
+          "email":user.getEmail(),
+          "password":user.getPassword(),
+
+  
+        }).pipe(map(param=>{
+                     this.user=new User(param['userId'],undefined,undefined,undefined,param['profileId'],undefined,param['token'])
+          
+            let userDetails={
+              "userName":param['userName'],
+              "userId":param['userId'],
+              "userKey":param['token'],
+              "profileId":param["profileId"]
+            }
+            localStorage.setItem("userDetails",JSON.stringify(userDetails))
+            return this.user
+        }))
  }
  logOff(){
   localStorage.clear()
    this.user=null
  }
- getOtherUsers(){
- return this.apiService.getOtherUsers().pipe(map(users=>{
+ getProfileId(){
  
-  let contacts:User[]=[]
-  for(let user of users){
-    let message:Message=null;
-    if(user['messageDTO']!=null){
-      message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
-    }
-    // contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
-  }
-  
-  return contacts
- }));
- }
- getConversations(){
-  return this.apiService.getConversations().pipe(map(users=>{
- 
-    let contacts:User[]=[]
-    for(let user of users){
-      let message:Message=null;
-      if(user['messageDTO']!=null){
-        message=new Message(user['messageDTO']['id'],user['messageDTO']['content'],new Date(user['messageDTO']['time']),user['messageDTO']['senderId'],user['messageDTO']['recipientId'])
-      }
-      // contacts.push(new User(user['id'],user['firstName'],user['lastName'],"","",""))
-    }
-    
-    return contacts
-   }));
- }
- getUsersLike(subName:string){
- return this.apiService.getUsersLike(subName).pipe(map(users=>{
-    let suggestedUsers:SuggestionItem[]=[]
-    for(let user of users){
-       suggestedUsers.push(new SuggestionItem(user.id,user.lastName+" "+user.firstName,user.email))
-    }
-
-
-  return suggestedUsers
- }));
- }
- getUser(id:number){
-  
-  return this.apiService.getUser(id).pipe(map(user=>{
-  console.log(user)
-    return new User(user.id,user.firstName,user.lastName,user.email,user.profile,undefined,undefined,user.subscribers,user.subscribtions,user.me,user.followed)
-  }))
- }
- toggleFollow(id:number){
-return  this.apiService.toggleFollow(id)
+  return this.user.profileId
  }
 }

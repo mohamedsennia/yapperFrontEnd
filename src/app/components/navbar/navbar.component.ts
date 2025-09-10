@@ -4,6 +4,7 @@ import { InputComponent } from '../input/input.component';
 import { NgClass } from '@angular/common';
 import { SuggestionItem } from '../../models/front.models/SuggestionItem';
 import { RouterLink } from '@angular/router';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
     selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent {
   menuOppen:boolean
   users:SuggestionItem[]
   search:string=""
-  constructor(private userService:UserService){
+  constructor(private profileService:ProfileService){
     this.menuOppen=false
     this.users=[]
   }
@@ -39,7 +40,7 @@ export class NavbarComponent {
     }else{
        this.users=[]
 
-      this.userService.getUsersLike(this.search).subscribe((users)=>{
+      this.profileService.getProfileLike(this.search).subscribe((users)=>{
         this.users=users
       })
     }

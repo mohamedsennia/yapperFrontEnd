@@ -11,31 +11,31 @@ import { MessageService } from './Message.service';
 export class WebSocketService {
   private client: Client;
 
-  constructor(private userService:UserService,private messageService:MessageService) {
-    this.client = new Client({
-      webSocketFactory: () => new SockJS('https://yapper-production.up.railway.app/messenger'), // Use SockJS as fallback
-      onConnect: () => {
-        this.client.subscribe("/user/"+this.userService.getCurrentId()+"/topic/messages",(message)=>{
-         let tempMessage:Message=JSON.parse(message.body)
+  // constructor(private userService:UserService,private messageService:MessageService) {
+  //   this.client = new Client({
+  //     webSocketFactory: () => new SockJS('https://yapper-production.up.railway.app/messenger'), // Use SockJS as fallback
+  //     onConnect: () => {
+  //       this.client.subscribe("/user/"+this.userService.getCurrentId()+"/topic/messages",(message)=>{
+  //        let tempMessage:Message=JSON.parse(message.body)
          
-         messageService.addMessage(new Message(tempMessage['id'],tempMessage['content'],new Date(tempMessage['time']),tempMessage['senderId'],tempMessage['recipientId']))
-        })
+  //        messageService.addMessage(new Message(tempMessage['id'],tempMessage['content'],new Date(tempMessage['time']),tempMessage['senderId'],tempMessage['recipientId']))
+  //       })
         
-      },
-      debug: (str) => {
-        console.log(new Date(), str);
-      },
-      reconnectDelay: 5000, // Automatically reconnect after 5 seconds
-    });
+  //     },
+  //     debug: (str) => {
+  //       console.log(new Date(), str);
+  //     },
+  //     reconnectDelay: 5000, // Automatically reconnect after 5 seconds
+  //   });
 
-    this.client.activate();
-  }
-  sendMessage(message:Message){
-    if(this.client.connected){
-        this.client.publish({"destination":"/app/chat","body":JSON.stringify(message)})
-    }else{
-        console.log("not yet")
-    }
+  //   this.client.activate();
+  // }
+  // sendMessage(message:Message){
+  //   if(this.client.connected){
+  //       this.client.publish({"destination":"/app/chat","body":JSON.stringify(message)})
+  //   }else{
+  //       console.log("not yet")
+  //   }
    
-  }
+  // }
 }
