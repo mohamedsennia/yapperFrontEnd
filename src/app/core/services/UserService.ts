@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { User } from "../models/User";
+import { User } from "../../models/User";
 
 import { map } from "rxjs";
-import { Message } from "../models/Message";
-import { SuggestionItem } from "../models/front.models/SuggestionItem";
+import { Message } from "../../models/Message";
+import { SuggestionItem } from "../../models/front.models/SuggestionItem";
 import { ConnectionService } from "./connection.service";
 
 
@@ -36,7 +36,7 @@ export class UserService{
  loggIn(user:User){
 
  
-   return this.connectionService.post("/auth/logIn",{"userEmail":user.getEmail(),"password":user.getPassword()}).pipe(map(param=>{
+   return this.connectionService.post("auth/logIn",{"userEmail":user.getEmail(),"password":user.getPassword()}).pipe(map(param=>{
         
             this.user=new User(param['userId'],undefined,undefined,undefined,param['profileId'],undefined,param['token'])
           
@@ -53,7 +53,7 @@ export class UserService{
  }
  signUp(user:User){
   
-return  this.connectionService.post("/auth/signUp",{
+return  this.connectionService.post("auth/signUp",{
           "firstName":user.getFirstName(),
           "lastName":user.getLastName(),
           "email":user.getEmail(),

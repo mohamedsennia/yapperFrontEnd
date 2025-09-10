@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 @Injectable({providedIn:"root"})
 export class ConnectionService{
-    private apiURL="http://localhost:8080"
+    private apiURL="http://localhost:8080/api"
   constructor(private httpClient:HttpClient) { }
   get<T>(url: string, params?: any): Observable<T> {
     return this.httpClient.get<T>(`${this.apiURL}/${url}`, { params });

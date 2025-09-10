@@ -5,12 +5,12 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { PostComponent } from '../../components/post/post.component';
 import { Post } from '../../models/Post';
 import { Subscription } from 'rxjs';
-import { PostService } from '../../services/Post.service';
+import { PostService } from '../../core/services/Post.service';
 
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../services/UserService';
+import { UserService } from '../../core/services/UserService';
 import { UserCardComponent } from "../../components/user-card/user-card.component";
-import { ProfileService } from '../../services/profile.service';
+import { ProfileService } from '../../core/services/profile.service';
 import { Profile } from '../../models/Profile';
 
 @Component({

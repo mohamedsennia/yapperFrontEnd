@@ -4,7 +4,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { InputComponent } from '../input/input.component';
 import { ReplyComponent } from '../reply/reply.component';
 import { FormsModule } from '@angular/forms';
-import { PostService } from '../../services/Post.service';
+import { PostService } from '../../core/services/Post.service';
 import { Subscription } from 'rxjs';
 
 @Component({

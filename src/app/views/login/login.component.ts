@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/UserService';
+import { UserService } from '../../core/services/UserService';
 import { NgClass, NgIf } from '@angular/common';
 
 @Component({

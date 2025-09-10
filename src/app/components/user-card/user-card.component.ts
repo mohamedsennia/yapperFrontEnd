@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { ButtonComponent } from "../button/button.component";
-import { UserService } from '../../services/UserService';
+import { UserService } from '../../core/services/UserService';
 import { CommonModule } from '@angular/common';
 import { Profile } from '../../models/Profile';
-import { ProfileService } from '../../services/profile.service';
+import { ProfileService } from '../../core/services/profile.service';
 
 @Component({
   selector: 'app-user-card',

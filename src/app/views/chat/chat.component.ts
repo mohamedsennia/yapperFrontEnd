@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserService } from '../../services/UserService';
+import { UserService } from '../../core/services/UserService';
 import { User } from '../../models/User';
-import { MessageService } from '../../services/Message.service';
+import { MessageService } from '../../core/services/Message.service';
 import { Message } from '../../models/Message';
-import { WebSocketService } from '../../services/WebSocket.service';
+import { WebSocketService } from '../../core/services/WebSocket.service';
 
 @Component({
     selector: 'app-chat',

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Post } from '../../models/Post';
-import { PostService } from '../../services/Post.service';
+import { PostService } from '../../core/services/Post.service';
 
 @Component({
     selector: 'app-reply',

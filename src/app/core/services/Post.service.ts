@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { map, Observable, of, Subscription } from "rxjs";
-import { Post } from "../models/Post";
-import { PostTypes } from "../enums/PostTypes";
-import { Profile } from "../models/Profile";
+import { Post } from "../../models/Post";
+import { PostTypes } from "../../enums/PostTypes";
+import { Profile } from "../../models/Profile";
 
-import { ResponseItem } from "../models/response.interface";
+import { ResponseItem } from "../../models/response.interface";
 import { UserService } from "./UserService";
 import { ConnectionService } from "./connection.service";
 
@@ -24,7 +24,7 @@ export class PostService{
     
     getPosts():Observable<Post[]>{
 
-     return   this.connectionService.get("/post/feed/0").pipe(map((data)=>{
+     return   this.connectionService.get("post/feed/0").pipe(map((data)=>{
  
         let posts:Post[]=[]
         for(let post of data['content']){
@@ -45,7 +45,7 @@ export class PostService{
           "postType":PostTypes.Post
         
       }
-return         this.connectionService.post<any>("/post",{obj}).pipe(map(post=>{
+return         this.connectionService.post<any>("post",obj).pipe(map(post=>{
        return new Post(post.id,post.content,new Date(post.date),post.type,new Profile(post.profile.id,post.profile.ownerFirstName,post.profile.ownerLastName,post.profile.ownerId),post.commentsCount,post.likesCount,post.liked)
         
     }))
@@ -59,14 +59,14 @@ return         this.connectionService.post<any>("/post",{obj}).pipe(map(post=>{
           "postType":PostTypes.Reply
         
       }
-     return    this.connectionService.post<any>("/post",{obj}).pipe(map(post=>{
+     return    this.connectionService.post<any>("post",obj).pipe(map(post=>{
        return new Post(post.id,post.content,new Date(post.date),post.type,new Profile(post.profile.id,post.profile.ownerFirstName,post.profile.ownerLastName,post.profile.ownerId),post.commentsCount,post.likesCount,post.liked)
         
     }))
     }
     getComments(page:number,postId:number):Observable<ResponseItem<Post>>{
 
-         return   this.connectionService.get("/post/comments/"+postId+"/"+page).pipe(map((data)=>{
+         return   this.connectionService.get("post/comments/"+postId+"/"+page).pipe(map((data)=>{
            
         let comments:Post[]=[]
         for(let post of data['content']){
@@ -85,10 +85,10 @@ return         this.connectionService.post<any>("/post",{obj}).pipe(map(post=>{
      }))
     }
     like(postId:number){
-        this.connectionService.patch("/post/toggleLike/"+postId,null)
+        this.connectionService.patch("post/toggleLike/"+postId,null)
     }
     getPostsByUseId(profileId:number,page:number){
-   return   this.connectionService.get("/post/byProfile/"+profileId+"/"+page).pipe(map((data)=>{
+   return   this.connectionService.get("post/byProfile/"+profileId+"/"+page).pipe(map((data)=>{
      
         let posts:Post[]=[]
         for(let post of data['content']){
