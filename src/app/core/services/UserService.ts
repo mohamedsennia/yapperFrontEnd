@@ -28,7 +28,8 @@ export class UserService{
   return this.user.getId()
  }
  getUserName(){
-  return this.user.getFirstName()+" "+this.user.getLastName()
+ 
+    return JSON.parse(localStorage.getItem("userDetails"))["userName"]
  }
  isLoggedIn(){
     return this.user!=null

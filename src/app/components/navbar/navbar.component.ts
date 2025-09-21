@@ -17,12 +17,13 @@ export class NavbarComponent {
   menuOppen:boolean
   users:SuggestionItem[]
   search:string=""
-  constructor(private profileService:ProfileService){
+  constructor(private profileService:ProfileService,private userService:UserService){
     this.menuOppen=false
     this.users=[]
   }
   getUserName(){
-    return localStorage.getItem("userName")
+    
+    return this.userService.getUserName()
   }
   oppenMenu(){
     this.menuOppen=true

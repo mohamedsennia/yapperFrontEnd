@@ -24,7 +24,7 @@
     </div>
 
    <div class="flex flex-col items-center px-12  pt-2 ">
-     <h3 class="text-3xl text-gray-900 font-semibold w-full text-center mt-2">{{profile.profileName}}</h3>
+     <h3 class="text-3xl text-gray-900 font-semibold  text-center mt-2 w-70 truncate">{{profile.profileName}}</h3>
      <!-- <h4 class="text-sm text-gray-500 font-medium">{{user.getEmail()}} </h4> -->
      <div class="w-full flex justify-between  text-gray-700 mt-4 mb-4 px-2">
         <div>
@@ -40,7 +40,7 @@
    </div >
      <div class="flex  items-center w-full pb-6 px-4" *ngIf="!profile.isMe()">
         <app-button class="w-full mr-2" (click)="toggleFollow()" [text]="profile.isFollowed?'Unfollow':'Follow'" [theme]="profile.isFollowed?'light':'primary'"></app-button>
-        <svg  xmlns="http://www.w3.org/2000/svg"  width="48"  height="48"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-2 cursor-pointer text-[#7CC7FF]"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z" /></svg>
+        <svg (click)="conversation()"  xmlns="http://www.w3.org/2000/svg"  width="48"  height="48"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-2 cursor-pointer text-[#7CC7FF]"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z" /></svg>
     </div>
     <div class="flex  items-center w-full pb-6 px-4" *ngIf="profile.isMe()">
          <app-button class="w-full mr-2" (click)="toggleFollow()" text="Settings" icon="settings"></app-button>

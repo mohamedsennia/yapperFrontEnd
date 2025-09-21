@@ -89,7 +89,8 @@ return formatted
   });
  }
 like(){
-  this.postService.like(this.post.id)
+  this.subscriptions.get("like")?.unsubscribe()
+  this.subscriptions.set("like",this.postService.like(this.post.id).subscribe())
   if(this.post.liked){
     this.post.likesCount--
   }else{

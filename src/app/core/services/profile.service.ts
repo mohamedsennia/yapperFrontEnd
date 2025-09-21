@@ -24,14 +24,14 @@ export class ProfileService{
 
  getProfile(id:number){
 
-  return this.connectionService.get<any>("profile/"+this.userService.getProfileId()+"/"+id).pipe(map(profile=>{
+  return this.connectionService.get<any>("profile/"+id).pipe(map(profile=>{
  
     return new Profile(profile.id,profile.profileName,profile.ownerId,profile.subscribers,profile.subscribtions,profile.followed,profile.me,profile.conversationId)
   }))
   
  }
  toggleFollow(id:number){
-   return this.connectionService.put("profile/toggleFollow/"+this.userService.getProfileId()+"/"+id,null)
+   return this.connectionService.put("profile/toggleFollow/"+id,null)
  }
 
 

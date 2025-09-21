@@ -7,6 +7,7 @@ import { Profile } from "../../models/Profile";
 import { ResponseItem } from "../../models/response.interface";
 import { UserService } from "./UserService";
 import { ConnectionService } from "./connection.service";
+import { ResponseItemPage } from "../../models/front.models/ResposnsePageItem";
 
 @Injectable({providedIn:"root"})
 
@@ -22,10 +23,10 @@ export class PostService{
         this.last=false
     }
     
-    getPosts():Observable<Post[]>{
+    getPosts(page:number):Observable<ResponseItemPage<Post>>{
 
-     return   this.connectionService.get("post/feed/0").pipe(map((data)=>{
- 
+     return   this.connectionService.get("post/feed/"+page).pipe(map((data)=>{
+      
         let posts:Post[]=[]
         for(let post of data['content']){
           
@@ -34,7 +35,8 @@ export class PostService{
            let profile=post.profile
            posts.push(new Post(post.id,post.content,new Date(post.date),post.type,new Profile(profile.id,profile.profileName,profile.ownerId),post.commentsCount,post.likesCount,post.liked))
         }
-        return posts
+       
+        return new ResponseItemPage<Post>(posts,data['last'])
      }))
 
     }
@@ -46,7 +48,8 @@ export class PostService{
         
       }
 return         this.connectionService.post<any>("post",obj).pipe(map(post=>{
-       return new Post(post.id,post.content,new Date(post.date),post.type,new Profile(post.profile.id,post.profile.ownerFirstName,post.profile.ownerLastName,post.profile.ownerId),post.commentsCount,post.likesCount,post.liked)
+
+       return new Post(post.id,post.content,new Date(post.date),post.type,new Profile(post.profile.id,post.profile.profileName,post.profile.ownerId),post.commentsCount,post.likesCount,post.liked)
         
     }))
 
@@ -56,11 +59,12 @@ return         this.connectionService.post<any>("post",obj).pipe(map(post=>{
    let obj={
          
           "content":content,
-          "postType":PostTypes.Reply
+          "postType":PostTypes.Reply,
+          "parent":postId
         
       }
      return    this.connectionService.post<any>("post",obj).pipe(map(post=>{
-       return new Post(post.id,post.content,new Date(post.date),post.type,new Profile(post.profile.id,post.profile.ownerFirstName,post.profile.ownerLastName,post.profile.ownerId),post.commentsCount,post.likesCount,post.liked)
+       return new Post(post.id,post.content,new Date(post.date),post.type,new Profile(post.profile.id,post.profile.profileName,post.profile.ownerId),post.commentsCount,post.likesCount,post.liked)
         
     }))
     }
@@ -85,7 +89,8 @@ return         this.connectionService.post<any>("post",obj).pipe(map(post=>{
      }))
     }
     like(postId:number){
-        this.connectionService.patch("post/toggleLike/"+postId,null)
+  
+      return  this.connectionService.patch("post/toggleLike/"+postId,null)
     }
     getPostsByUseId(profileId:number,page:number){
    return   this.connectionService.get("post/byProfile/"+profileId+"/"+page).pipe(map((data)=>{

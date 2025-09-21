@@ -17,9 +17,12 @@ import { PostComponent } from './components/post/post.component';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ButtonComponent } from './components/button/button.component';
 import { UserProfileComponent } from './views/user-profile/user-profile.component';
+import { ConversationComponent } from './components/conversation/conversation.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [
+
+  ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -38,6 +41,6 @@ import { UserProfileComponent } from './views/user-profile/user-profile.componen
         ButtonComponent
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: []
 })
 export class AppModule { }

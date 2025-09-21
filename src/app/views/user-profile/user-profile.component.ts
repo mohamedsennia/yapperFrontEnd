@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { PostComponent } from '../../components/post/post.component';
@@ -12,25 +12,41 @@ import { UserService } from '../../core/services/UserService';
 import { UserCardComponent } from "../../components/user-card/user-card.component";
 import { ProfileService } from '../../core/services/profile.service';
 import { Profile } from '../../models/Profile';
+import { ConversationComponent } from "../../components/conversation/conversation.component";
+import { Conversation } from '../../models/Conversation';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   standalone:true,
   styleUrl: './user-profile.component.css',
-   imports: [NavbarComponent, NgFor, PostComponent, CommonModule, UserCardComponent]
+   imports: [NavbarComponent, NgFor, PostComponent, CommonModule, UserCardComponent, ConversationComponent]
 })
-export class UserProfileComponent implements OnInit,OnDestroy{
+export class UserProfileComponent implements OnInit,OnDestroy,AfterViewChecked{
 
 posts:Post[]=[]
 profile:Profile
 isSet:boolean=false
 page=0
+ reachedLast:boolean
 subscriptions:Map<string,Subscription>
+conversation:Conversation
+ @ViewChild('loadTrigger',{static:false})loadTrigger!:ElementRef
+ private observer!: IntersectionObserver;
 constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService){
   this.subscriptions=new Map<string,Subscription>()
-  
+  this.reachedLast=false;
 }
+  ngAfterViewChecked(): void {
+       if (this.loadTrigger && !this.observer) {
+    this.observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        this.nextPage();
+      }
+    });
+    this.observer.observe(this.loadTrigger.nativeElement);
+  }
+  }
 ngOnInit(): void {
   this.subscriptions.set("routeParams",this.activatedRouter.params.subscribe((params)=>{
       console.log(params)
@@ -51,9 +67,18 @@ getPosts(){
     this.posts.push(...posts)
   }))
 }
+nextPage(){
+  this.page=this.page+1
+  this.getPosts()
+}
 ngOnDestroy(): void {
   for(let sub of this.subscriptions.values()){
     sub.unsubscribe()
+  }
+}
+openConversation(){
+  if(this.profile.conversationId==-1){
+    this.conversation=new Conversation(-1,[],this.profile.profileName);
   }
 }
 }

@@ -1,25 +1,43 @@
-export class Message{
-    constructor(  private  id:number,
-        private  content:string,
-        private  time:Date,
-        private  senderId:number,
-        private  recipientId:number){
-          
-        }
-    getConent(){
-        return this.content;
+import { Profile } from "./Profile";
+
+export class Message {
+    public get id(): number {
+        return this._id;
     }
-    getSenderId(){
-        return this.senderId;
+    public set id(value: number) {
+        this._id = value;
     }
-    getRecipientId(){
-        return this.recipientId;
+    public get content(): string {
+        return this._content;
     }
-    getTime(){
-        return this.time;
+    public set content(value: string) {
+        this._content = value;
     }
-    setContent(content:string){
-        this.content=content
+    public get time(): Date {
+        return this._time;
     }
-    
+    public set time(value: Date) {
+        this._time = value;
+    }
+    public get sender(): Profile {
+        return this._sender;
+    }
+    public set sender(value: Profile) {
+        this._sender = value;
+    }
+    public get isMine(): boolean {
+        return this._isMine;
+    }
+    public set isMine(value: boolean) {
+        this._isMine = value;
+    }
+
+    constructor(
+        private _id: number,
+        private _content: string,
+        private _time: Date,
+       
+        private _isMine: boolean,
+         private _sender?: Profile
+    ) {}
 }

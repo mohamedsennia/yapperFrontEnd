@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../../models/Post';
 import { PostService } from '../../core/services/Post.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-reply',
@@ -8,11 +9,16 @@ import { PostService } from '../../core/services/Post.service';
     styleUrl: './reply.component.css',
     standalone: true
 })
-export class ReplyComponent {
+export class ReplyComponent implements OnInit, OnDestroy{
 @Input() reply!:Post
+private subscriptions:Map<string,Subscription>
     constructor(private postService:PostService){
-        
+          this.subscriptions=new Map<string,Subscription>()
     }
+
+  ngOnInit(): void {
+   
+  }
  formateDate(date:Date){
 
 const now = new Date();
@@ -31,12 +37,20 @@ if (!isToday) {
 return formatted
  }
   like(){
-  this.postService.like(this.reply.id)
-  if(this.reply.liked){
+    this.subscriptions.get("like")?.unsubscribe()
+this.subscriptions.set("like",  this.postService.like(this.reply.id).subscribe(()=>{
+if(this.reply.liked){
     this.reply.likesCount--
   }else{
     this.reply.likesCount++
   }
   this.reply.liked=!this.reply.liked
+  }))
+  
  }
+   ngOnDestroy(): void {
+      for(let subscription of this.subscriptions.values()){
+        subscription.unsubscribe()
+      }
+  }
 }
