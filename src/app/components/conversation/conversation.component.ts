@@ -3,6 +3,7 @@ import { Conversation } from '../../models/Conversation';
 import { CommonModule } from '@angular/common';
 import { Message } from '../../models/Message';
 import { FormsModule } from '@angular/forms';
+import { MessageService } from '../../core/services/Message.service';
 
 
 
@@ -15,22 +16,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class ConversationComponent {
   @Input() conversation:Conversation
+  @Input() target:number
   messageContent:string
-  @ViewChild("conversationEnd") conversationEnd!:ElementRef
+  constructor(private messageService:MessageService){}
   sendMessage(){
     if(this.messageContent!=""){
-    this.conversation.messages.push(new Message(0,this.messageContent,new Date(),true))
-    let c=this.messageContent
-    this.scroll()
-    setTimeout(() => {
-      this.conversation.messages.push(new Message(0,"nta "+c,new Date(),false))
-      this.scroll()
-    }, 1500);
-    this.messageContent=""
+    let message=new Message(0,this.messageContent,new Date(),true,this.conversation.id)
+    this.conversation.messages.unshift(message)
+    this.messageService.sendMessage(message,this.target).subscribe(()=>{
+this.messageContent=""
+    })
+    
     
     }
   }
-  scroll(){
-    this.conversationEnd.nativeElement.scrollIntoView({block:"end"})
-  }
+
 }

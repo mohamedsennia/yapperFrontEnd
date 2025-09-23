@@ -33,6 +33,7 @@ export class UserCardComponent implements OnInit{
   })
  }
  conversation(){
+
   this.oppenConversation.emit(true)
  }
 }

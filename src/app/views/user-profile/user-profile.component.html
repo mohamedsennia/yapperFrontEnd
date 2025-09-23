@@ -6,4 +6,4 @@
         <div #loadTrigger *ngIf="!reachedLast"></div>
     </div>
 </div>
-<app-conversation class="fixed right-5 bottom-5" *ngIf="conversation!=undefined" [conversation]="conversation"></app-conversation>
+<app-conversation class="fixed right-5 bottom-5" *ngIf="conversation!=undefined" [conversation]="conversation" [target]="profile.id"></app-conversation>

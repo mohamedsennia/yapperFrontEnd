@@ -14,6 +14,7 @@ import { ProfileService } from '../../core/services/profile.service';
 import { Profile } from '../../models/Profile';
 import { ConversationComponent } from "../../components/conversation/conversation.component";
 import { Conversation } from '../../models/Conversation';
+import { MessageService } from '../../core/services/Message.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -33,7 +34,7 @@ subscriptions:Map<string,Subscription>
 conversation:Conversation
  @ViewChild('loadTrigger',{static:false})loadTrigger!:ElementRef
  private observer!: IntersectionObserver;
-constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService){
+constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService,private messageServices:MessageService){
   this.subscriptions=new Map<string,Subscription>()
   this.reachedLast=false;
 }
@@ -77,8 +78,15 @@ ngOnDestroy(): void {
   }
 }
 openConversation(){
+
   if(this.profile.conversationId==-1){
+      
     this.conversation=new Conversation(-1,[],this.profile.profileName);
+  }else{
+    this.messageServices.getMessagesByConversationId(this.profile.conversationId).subscribe((messages)=>{
+      console.log(messages)
+      this.conversation=new Conversation(this.profile.conversationId,messages,this.profile.profileName);
+    })
   }
 }
 }

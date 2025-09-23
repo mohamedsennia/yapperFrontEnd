@@ -1,6 +1,12 @@
 import { Profile } from "./Profile";
 
 export class Message {
+    public get conversationId(): number {
+        return this._conversationId;
+    }
+    public set conversationId(value: number) {
+        this._conversationId = value;
+    }
     public get id(): number {
         return this._id;
     }
@@ -38,6 +44,7 @@ export class Message {
         private _time: Date,
        
         private _isMine: boolean,
+        private _conversationId: number,
          private _sender?: Profile
     ) {}
 }
