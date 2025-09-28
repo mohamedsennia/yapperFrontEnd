@@ -1,20 +1,20 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ButtonComponent } from '../../components/button/button.component';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { PostComponent } from '../../components/post/post.component';
-import { Post } from '../../models/Post';
+import { ButtonComponent } from '../../../components/button/button.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
+import { PostComponent } from '../../../components/post/post.component';
+import { Post } from '../../../models/Post';
 import { Subscription } from 'rxjs';
-import { PostService } from '../../core/services/Post.service';
+import { PostService } from '../../../core/services/Post.service';
 
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../core/services/UserService';
-import { UserCardComponent } from "../../components/user-card/user-card.component";
-import { ProfileService } from '../../core/services/profile.service';
-import { Profile } from '../../models/Profile';
-import { ConversationComponent } from "../../components/conversation/conversation.component";
-import { Conversation } from '../../models/Conversation';
-import { MessageService } from '../../core/services/Message.service';
+import { UserService } from '../../../core/services/UserService';
+import { UserCardComponent } from "../../../components/user-card/user-card.component";
+import { ProfileService } from '../../../core/services/profile.service';
+import { Profile } from '../../../models/Profile';
+import { ConversationComponent } from "../../../components/conversation/conversation.component";
+import { Conversation } from '../../../models/Conversation';
+import { MessageService } from '../../../core/services/Message.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -50,7 +50,7 @@ constructor(private postService:PostService,private activatedRouter:ActivatedRou
   }
 ngOnInit(): void {
   this.subscriptions.set("routeParams",this.activatedRouter.params.subscribe((params)=>{
-      console.log(params)
+   
     this.subscriptions.set("user",this.profileService.getProfile(params['id']).subscribe((profile)=>{
        this.posts=[]
       
@@ -78,13 +78,13 @@ ngOnDestroy(): void {
   }
 }
 openConversation(){
-
+console.log("aaaaaaaaaaaaa")
   if(this.profile.conversationId==-1){
       
     this.conversation=new Conversation(-1,[],this.profile.profileName);
   }else{
     this.messageServices.getMessagesByConversationId(this.profile.conversationId).subscribe((messages)=>{
-      console.log(messages)
+      
       this.conversation=new Conversation(this.profile.conversationId,messages,this.profile.profileName);
     })
   }

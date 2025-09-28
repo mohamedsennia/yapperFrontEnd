@@ -8,19 +8,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './views/login/login.component';
-import { ChatComponent } from './views/chat/chat.component';
-import { HeaderComponent } from './views/header/header.component';
-import { FeedComponent } from './views/feed/feed.component';
+import { ChatComponent } from './views/logged/chat/chat.component';
+import { HeaderComponent } from './views/logged/header/header.component';
+import { FeedComponent } from './views/logged/feed/feed.component';
 import { InputComponent } from './components/input/input.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostComponent } from './components/post/post.component';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ButtonComponent } from './components/button/button.component';
-import { UserProfileComponent } from './views/user-profile/user-profile.component';
+import { UserProfileComponent } from './views/logged/user-profile/user-profile.component';
 import { ConversationComponent } from './components/conversation/conversation.component';
+import { LoggedComponent } from './views/logged/logged.component';
 
 @NgModule({
     declarations: [
+
+  
 
   ],
     imports: [

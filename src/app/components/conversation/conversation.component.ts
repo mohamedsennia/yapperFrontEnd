@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Message } from '../../models/Message';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from '../../core/services/Message.service';
+import { WebSocketService } from '../../core/services/WebSocket.service';
 
 
 
@@ -18,15 +19,13 @@ export class ConversationComponent {
   @Input() conversation:Conversation
   @Input() target:number
   messageContent:string
-  constructor(private messageService:MessageService){}
+  constructor(private messageService:MessageService,private webSocketService:WebSocketService){}
   sendMessage(){
     if(this.messageContent!=""){
-    let message=new Message(0,this.messageContent,new Date(),true,this.conversation.id)
+    let message=new Message(0,this.messageContent,new Date(),true,this.conversation.id,this.target)
     this.conversation.messages.unshift(message)
-    this.messageService.sendMessage(message,this.target).subscribe(()=>{
-this.messageContent=""
-    })
-    
+    this.webSocketService.sendMessage(message)
+    this.messageContent=""
     
     }
   }

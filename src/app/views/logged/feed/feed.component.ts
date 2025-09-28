@@ -1,12 +1,12 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, viewChild } from '@angular/core';
-import { PostService } from '../../core/services/Post.service';
-import { Post } from '../../models/Post';
+import { PostService } from '../../../core/services/Post.service';
+import { Post } from '../../../models/Post';
 import { Subscription } from 'rxjs';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { CommonModule, NgFor } from '@angular/common';
-import { PostComponent } from '../../components/post/post.component';
-import { InputComponent } from "../../components/input/input.component";
-import { ButtonComponent } from '../../components/button/button.component';
+import { PostComponent } from '../../../components/post/post.component';
+import { InputComponent } from "../../../components/input/input.component";
+import { ButtonComponent } from '../../../components/button/button.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({

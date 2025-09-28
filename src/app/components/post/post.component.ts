@@ -31,7 +31,7 @@ export class PostComponent  implements OnInit, OnDestroy{
   this.subscriptions=new Map<string,Subscription>()
  }
   ngOnInit(): void {
-    console.log(this.post)
+
   }
  
   

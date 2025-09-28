@@ -22,7 +22,6 @@ export class UserCardComponent implements OnInit{
  }
   ngOnInit(): void {
     this.isSet=true
-    console.log(this.profile)
    
    
   }
