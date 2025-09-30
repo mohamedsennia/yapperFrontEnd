@@ -5,6 +5,7 @@ import { UserService } from './UserService';
 import { Message } from '../../models/Message';
 import { MessageService } from './Message.service';
 import { Subject } from 'rxjs';
+import { ConversationService } from './conversation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { Subject } from 'rxjs';
 export class WebSocketService {
   private client: Client;
   connected:Subject<boolean>
-  constructor(private userService:UserService,private messageService:MessageService) {
+  constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
     let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
     this.connected=new Subject<boolean>()
 if(userDetails){
@@ -25,7 +26,8 @@ if(userDetails){
       onConnect: () => {
           this.connected.next(true)
         this.client.subscribe("/user/"+this.userService.getProfileId(),(message)=>{
-          console.log("new message "+message)
+          
+     
          
         })
       },
@@ -51,9 +53,11 @@ this.client.activate();
   }
   subscribe(conversationId:number){
     if(this.client.connected){
-      console.log("a")
+      
       this.client.subscribe("/conversation/"+conversationId,message=>{
-      console.log(message)
+      let messageBody=JSON.parse(message.body)
+
+      this.messageService.messagesSubject.next(new Message(messageBody.id,messageBody.content,messageBody.time,messageBody.sender.id==this.userService.getProfileId(),conversationId))
       
     })
     }

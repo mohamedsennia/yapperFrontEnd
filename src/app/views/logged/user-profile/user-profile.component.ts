@@ -15,6 +15,8 @@ import { Profile } from '../../../models/Profile';
 import { ConversationComponent } from "../../../components/conversation/conversation.component";
 import { Conversation } from '../../../models/Conversation';
 import { MessageService } from '../../../core/services/Message.service';
+import { ConversationService } from '../../../core/services/conversation.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -31,10 +33,10 @@ isSet:boolean=false
 page=0
  reachedLast:boolean
 subscriptions:Map<string,Subscription>
-conversation:Conversation
+conversations:Conversation[]
  @ViewChild('loadTrigger',{static:false})loadTrigger!:ElementRef
  private observer!: IntersectionObserver;
-constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService,private messageServices:MessageService){
+constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService,private messageServices:MessageService,private conversationService:ConversationService){
   this.subscriptions=new Map<string,Subscription>()
   this.reachedLast=false;
 }
@@ -78,15 +80,18 @@ ngOnDestroy(): void {
   }
 }
 openConversation(){
-console.log("aaaaaaaaaaaaa")
+
   if(this.profile.conversationId==-1){
-      
-    this.conversation=new Conversation(-1,[],this.profile.profileName);
+   
+    this.conversationService.addConversation(new Conversation(-1,[],this.profile.profileName,true))
   }else{
     this.messageServices.getMessagesByConversationId(this.profile.conversationId).subscribe((messages)=>{
+      this.conversationService.openConversation(this.profile.conversationId,messages)
       
-      this.conversation=new Conversation(this.profile.conversationId,messages,this.profile.profileName);
     })
   }
+}
+getOpenConversations(){
+ return this.conversationService.getOpenConversations()
 }
 }

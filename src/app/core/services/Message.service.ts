@@ -8,13 +8,13 @@ import { Profile } from "../../models/Profile";
 
 @Injectable({"providedIn":"root"})
 export class MessageService{
-     messagesSubject:Subject<Message[]>
+     messagesSubject:Subject<Message>
      messageNotification:Subject<boolean>
     private messages:Message[]
     private user2Id:number;
 
 constructor(private userService:UserService,private connectionService:ConnectionService){
-    this.messagesSubject=new Subject<Message[]>()
+    this.messagesSubject=new Subject<Message>()
     this.messageNotification=new Subject<boolean>()
     this.messages=[]
 

@@ -1,6 +1,12 @@
 import { Message } from "./Message";
 
 export class Conversation{
+    public get isOpen(): boolean {
+        return this._isOpen;
+    }
+    public set isOpen(value: boolean) {
+        this._isOpen = value;
+    }
     public get id(): number {
         return this._id;
     }
@@ -19,5 +25,8 @@ export class Conversation{
     public set conversationName(value: string) {
         this._conversationName = value;
     }
-    constructor(private _id: number,private _messages: Message[],private _conversationName: string){}
+    constructor(private _id: number,private _messages: Message[],private _conversationName: string,private _isOpen: boolean){}
+    addMessage(message:Message){
+        this.messages.push(message)
+    }
 }
