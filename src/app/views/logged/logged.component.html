@@ -1,1 +1,9 @@
+<app-navbar ></app-navbar>
+<div class="min-h-full flex mt-4 justify-end">
 <router-outlet></router-outlet>
+<div class="min-h-full w-75"></div>
+<app-conversations-list></app-conversations-list>
+</div>
+<div class="fixed bottom-0 left-0 flex pb-[2px] gap-x-4 px-4 conversation-holder flex-row-reverse">
+    <app-conversation *ngFor="let conversation of getOpenConversations()"  [conversation]="conversation" ></app-conversation>
+</div>

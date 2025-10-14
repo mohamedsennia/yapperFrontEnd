@@ -23,7 +23,7 @@ import { ConversationService } from '../../../core/services/conversation.service
   templateUrl: './user-profile.component.html',
   standalone:true,
   styleUrl: './user-profile.component.css',
-   imports: [NavbarComponent, NgFor, PostComponent, CommonModule, UserCardComponent, ConversationComponent]
+   imports: [ NgFor, PostComponent, CommonModule, UserCardComponent, ]
 })
 export class UserProfileComponent implements OnInit,OnDestroy,AfterViewChecked{
 
@@ -57,6 +57,7 @@ ngOnInit(): void {
        this.posts=[]
       
       this.profile=profile
+      console.log(profile)
       this.isSet=true
        this.getPosts()
     }))
@@ -83,7 +84,8 @@ openConversation(){
 
   if(this.profile.conversationId==-1){
    
-    this.conversationService.addConversation(new Conversation(-1,[],this.profile.profileName,true))
+    this.conversationService.addConversation(new Conversation(-1,[],this.profile.profileName,true,this.getTargetId()))
+    
   }else{
     this.messageServices.getMessagesByConversationId(this.profile.conversationId).subscribe((messages)=>{
       this.conversationService.openConversation(this.profile.conversationId,messages)
@@ -91,7 +93,9 @@ openConversation(){
     })
   }
 }
-getOpenConversations(){
- return this.conversationService.getOpenConversations()
+  
+getTargetId(){
+
+  return this.profile.id
 }
 }

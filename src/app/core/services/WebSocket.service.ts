@@ -26,13 +26,14 @@ if(userDetails){
       onConnect: () => {
           this.connected.next(true)
         this.client.subscribe("/user/"+this.userService.getProfileId(),(message)=>{
-          
-     
+          let messageBody=JSON.parse(message.body)
+          console.log(messageBody)
+          // this.messageService.messagesSubject.next(new Message(messageBody.id,messageBody.content,messageBody.time,messageBody.sender.id==this.userService.getProfileId(),conversationId))
          
         })
       },
       debug: (str) => {
-        console.log(new Date(), str);
+        
       },
       reconnectDelay: 5000, // Automatically reconnect after 5 seconds
     });
@@ -67,7 +68,8 @@ this.client.activate();
       this.client.publish({"destination":"/app/chat","body":JSON.stringify({
           "profileId":this.userService.getProfileId(),
           "content":message.content,
-          "conversationId":message.conversationId
+          "conversationId":message.conversationId,
+          "targetId":message.targetId
       })})
     }
 

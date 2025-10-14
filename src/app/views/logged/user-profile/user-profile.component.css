@@ -1,8 +1,8 @@
 :host{
-    padding:124px 16px 16px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+      display: flex;
+      justify-content: space-evenly;
+      width: calc(100% - 300px);
+      max-height: 100%;
+      overflow: hidden;
+      align-items: flex-start;
 }
