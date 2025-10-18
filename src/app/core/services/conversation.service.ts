@@ -73,4 +73,7 @@ export class ConversationService{
     getConversations(){
         return Array.from(this._conversations.values())
     }
+    closeConversation(id:number){
+        this._conversations.get(id).isOpen=false
+    }
 }

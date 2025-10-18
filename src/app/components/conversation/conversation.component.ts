@@ -39,5 +39,8 @@ export class ConversationComponent implements OnInit{
     
     }
   }
+  close(){
+    this.conversationService.closeConversation(this.conversation.id)
+  }
 
 }

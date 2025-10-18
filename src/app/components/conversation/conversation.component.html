@@ -1,6 +1,7 @@
 <div class="w-75 h-120 border border-blue-400 bg-white rounded-t-2xl">
     <div class="w-full h-[10%] bg-blue-600 px-4 flex items-center justify-between font-semibold rounded-t-2xl">
         <span class="text-white inline-block max-w-[85%] truncate">{{conversation.conversationName}}</span>
+        <svg (click)="close()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x cursor-pointer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
     </div>
     <div class="w-full h-[75%] flex  overflow-auto flex-col-reverse" >
         <div *ngFor="let message of conversation.messages" class="my-2 w-full px-4 flex h-fit break-words" [ngClass]="{'justify-end': message.isMine,'justify-start': !message.isMine}">

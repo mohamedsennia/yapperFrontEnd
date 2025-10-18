@@ -25,7 +25,9 @@ if(userDetails){
       }, // Use SockJS as fallback
       onConnect: () => {
           this.connected.next(true)
-        this.client.subscribe("/user/"+this.userService.getProfileId(),(message)=>{
+                 console.log(this.userService.getProfileId())
+        this.client.subscribe("/user/"+this.userService.getProfileId()+"/notification/message",(message)=>{
+   
           let messageBody=JSON.parse(message.body)
           console.log(messageBody)
           // this.messageService.messagesSubject.next(new Message(messageBody.id,messageBody.content,messageBody.time,messageBody.sender.id==this.userService.getProfileId(),conversationId))
