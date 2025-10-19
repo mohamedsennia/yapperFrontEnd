@@ -18,6 +18,7 @@ import { ConversationService } from '../../core/services/conversation.service';
 })
 export class ConversationComponent implements OnInit{
   @Input() conversation:Conversation
+  @Input() index:number
   
   messageContent:string
   constructor(private messageService:MessageService,private webSocketService:WebSocketService,private conversationService:ConversationService){
@@ -40,7 +41,7 @@ export class ConversationComponent implements OnInit{
     }
   }
   close(){
-    this.conversationService.closeConversation(this.conversation.id)
+    this.conversationService.closeConversation(this.index)
   }
 
 }

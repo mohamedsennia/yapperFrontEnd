@@ -8,26 +8,34 @@ import { BehaviorSubject } from "rxjs";
 
 @Injectable({providedIn:"root"})
 export class ConversationService{
-    private _conversations: Map<number, Conversation>;
+    private _conversationsIndex: Map<number, number>;
+    private conversations:Conversation[]
+    private conversationsCount:number
+    openConversations:Conversation[]
     conversationsSubject:BehaviorSubject<Conversation[]>
   
     constructor(private connectionService:ConnectionService,private webSocketService:WebSocketService,private messageService:MessageService){
-        this._conversations=new Map<number,Conversation>;
+        this.conversations=[]
+        this._conversationsIndex=new Map<number,number>;
+        this.openConversations=[]
         this.conversationsSubject=new BehaviorSubject<Conversation[]>([])
         this.webSocketService.connected.subscribe((param)=>{
             this.connectionService.get<any[]>("conversation").subscribe((conversations)=>{
-            let convs=[]
+    
+            let index=0
             for(let conversation of conversations){
                 let conv=new Conversation(conversation.id,[conversation.lastMessage],conversation.conversationName,false)
-                this._conversations.set(conversation.id,conv)
-                 convs.push(conv)
+                this.conversations.push(conv)
+                this._conversationsIndex.set(conversation.id,index)
+                index++
+              
                 this.webSocketService.subscribe(conversation.id)
             }
-            this.conversationsSubject.next(convs)
+            this.conversationsSubject.next(this.conversations.slice())
         })
         })
         messageService.messagesSubject.subscribe((message)=>{
-            let conversation=this._conversations.get(message.conversationId)
+            let conversation=this.conversations[this._conversationsIndex.get(message.conversationId)]
             
             if(!message.isMine){
                 if(conversation.isOpen){
@@ -42,38 +50,54 @@ export class ConversationService{
                 
             }
         })
+        this.conversationsCount=Math.floor((screen.availWidth-340)/316)
+       
     }
-        public get conversations(): Map<number, Conversation> {
-        return this._conversations;
-    }
-    public set conversations(value: Map<number, Conversation>) {
-        this._conversations = value;
-    } 
+ 
     openConversation(conversationId:number,messages:Message[]){
-        let conversation:Conversation=this._conversations.get(conversationId)
-        conversation.messages=messages
+        let conversation:Conversation=this.conversations[this._conversationsIndex.get(conversationId)]
+        
+        if(conversation.isOpen==false){
+            let alreadyOpenedCount=this.openConversations.length
+            if(alreadyOpenedCount==this.conversationsCount){
+                this.openConversations[alreadyOpenedCount-1].isOpen=false
+                this.openConversations.pop()
+            }
+            conversation.messages=messages
         conversation.isOpen=true
+        this.openConversations.unshift(conversation)
+        }
         return conversation
     }
     addConversation(conversation:Conversation){
-        this._conversations.set(conversation.id,conversation);
-       
+        conversation.isOpen=true
+        this.conversations.push(conversation)
+        this._conversationsIndex.set(conversation.id,this.conversations.length-1)
+       let alreadyOpenedCount=this.openConversations.length
+            if(alreadyOpenedCount==this.conversationsCount){
+                this.openConversations[alreadyOpenedCount-1].isOpen=false
+                this.openConversations.pop()
+            }
+            
+        
+        this.openConversations.unshift(conversation)
         
     }
     refreshConversations(){
-         this.conversationsSubject.next(Array.from(this._conversations.values()));
+         this.conversationsSubject.next(this.conversations);
     }
     getConversationById(conversationId:number){
-        return this._conversations.get(conversationId)
+        return this.conversations[this._conversationsIndex.get(conversationId)]
     }
     getOpenConversations(){
-
-       return Array.from(this._conversations.values()).filter(conv=> conv.isOpen==true)
+       
+       return this.openConversations
     }
     getConversations(){
-        return Array.from(this._conversations.values())
+        return Array.from(this.conversations.slice())
     }
-    closeConversation(id:number){
-        this._conversations.get(id).isOpen=false
+    closeConversation(index:number){
+        this.openConversations[index].isOpen=false
+        this.openConversations.splice(index,1)
     }
 }

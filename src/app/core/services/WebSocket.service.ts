@@ -4,7 +4,7 @@ import SockJS from 'sockjs-client';
 import { UserService } from './UserService';
 import { Message } from '../../models/Message';
 import { MessageService } from './Message.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ConversationService } from './conversation.service';
 
 @Injectable({
@@ -13,9 +13,11 @@ import { ConversationService } from './conversation.service';
 export class WebSocketService {
   private client: Client;
   connected:Subject<boolean>
+  notifications:Subject<number>
   constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
     let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
     this.connected=new Subject<boolean>()
+    this.notifications=new Subject<number>()
 if(userDetails){
     let token=userDetails["userKey"]
     this.client = new Client({
@@ -26,11 +28,10 @@ if(userDetails){
       onConnect: () => {
           this.connected.next(true)
                  console.log(this.userService.getProfileId())
-        this.client.subscribe("/user/"+this.userService.getProfileId()+"/notification/message",(message)=>{
+        this.client.subscribe("/user/notification/messages",(message)=>{
    
           let messageBody=JSON.parse(message.body)
-          console.log(messageBody)
-          // this.messageService.messagesSubject.next(new Message(messageBody.id,messageBody.content,messageBody.time,messageBody.sender.id==this.userService.getProfileId(),conversationId))
+          this.notifications.next(+messageBody)
          
         })
       },
@@ -60,7 +61,7 @@ this.client.activate();
       this.client.subscribe("/conversation/"+conversationId,message=>{
       let messageBody=JSON.parse(message.body)
 
-      this.messageService.messagesSubject.next(new Message(messageBody.id,messageBody.content,messageBody.time,messageBody.sender.id==this.userService.getProfileId(),conversationId))
+     
       
     })
     }

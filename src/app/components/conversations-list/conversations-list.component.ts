@@ -21,7 +21,7 @@ export class ConversationsListComponent implements OnInit{
   ngOnInit(): void {
     
     this.subscriptions.set("conversations",this.conversationService.conversationsSubject.subscribe((conversations)=>{
-
+    
       this.conversations=conversations
     }))
     
