@@ -32,7 +32,26 @@ export class ConversationService{
                 this.webSocketService.subscribe(conversation.id)
             }
             this.conversationsSubject.next(this.conversations.slice())
+            
         })
+        
+        })
+        this.webSocketService.notifications.subscribe((conversationId)=>{
+            this.connectionService.get<any>("conversation/"+conversationId).subscribe((conversation)=>{
+             
+                let conv=new Conversation(conversation.id,[conversation.lastMessage],conversation.conversationName,false)
+                this.conversations.push(conv)
+                this._conversationsIndex.set(conversation.id,this.conversations.length-1)
+                
+              
+                this.webSocketService.subscribe(conversation.id)
+                 this.conversationsSubject.next(this.conversations.slice())
+                 this.messageService.getMessagesByConversationId(conversation.id).subscribe((messages)=>{
+                this.openConversation(conversation.id,messages)
+                
+                })
+                 
+            })
         })
         messageService.messagesSubject.subscribe((message)=>{
             let conversation=this.conversations[this._conversationsIndex.get(message.conversationId)]

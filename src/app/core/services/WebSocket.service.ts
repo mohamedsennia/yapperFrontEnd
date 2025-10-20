@@ -31,7 +31,11 @@ if(userDetails){
         this.client.subscribe("/user/notification/messages",(message)=>{
    
           let messageBody=JSON.parse(message.body)
-          this.notifications.next(+messageBody)
+          if(messageBody.type=="NewConversation"){
+            this.notifications.next(+messageBody.content)
+          }
+          console.log(messageBody)
+          // 
          
         })
       },
