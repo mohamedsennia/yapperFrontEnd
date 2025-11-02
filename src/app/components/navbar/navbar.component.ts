@@ -46,4 +46,10 @@ export class NavbarComponent {
       })
     }
   }
+  getProfileId(){
+   return this.userService.getProfileId()
+  }
+  logout(){
+    this.userService.logOff()
+  }
 }

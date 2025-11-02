@@ -36,6 +36,7 @@ subscriptions:Map<string,Subscription>
 conversations:Conversation[]
  @ViewChild('loadTrigger',{static:false})loadTrigger!:ElementRef
  private observer!: IntersectionObserver;
+ 
 constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService,private messageServices:MessageService,private conversationService:ConversationService){
   this.subscriptions=new Map<string,Subscription>()
   this.reachedLast=false;
@@ -84,8 +85,8 @@ openConversation(){
 
   if(this.profile.conversationId==-1){
    
-    this.conversationService.addConversation(new Conversation(-1,[],this.profile.profileName,true,this.getTargetId()))
-    
+    this.conversationService.addConversation(new Conversation(this.conversationService.newConversationCounter,[],this.profile.profileName,true,this.getTargetId()))
+    this.conversationService.incremanteCounter()
   }else{
     this.messageServices.getMessagesByConversationId(this.profile.conversationId).subscribe((messages)=>{
       this.conversationService.openConversation(this.profile.conversationId,messages)

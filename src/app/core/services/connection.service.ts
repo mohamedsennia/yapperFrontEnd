@@ -1,17 +1,18 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "../../environments/environments";
 
 @Injectable({providedIn:"root"})
 export class ConnectionService{
-    private apiURL="http://localhost:8080/api"
+    private apiURL=environment.apiBaseUrl+"/api"
   constructor(private httpClient:HttpClient) { }
   get<T>(url: string, params?: any): Observable<T> {
     return this.httpClient.get<T>(`${this.apiURL}/${url}`, { params });
   }
 
   post<T>(url: string, body: any): Observable<T> {
-    return this.httpClient.post<T>(`${this.apiURL}/${url}`, body);
+    return this.httpClient.post<T>(`${this.apiURL}/${url}`, body,{withCredentials:true});
   }
 
   put<T>(url: string, body: any): Observable<T> {

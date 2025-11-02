@@ -5,6 +5,7 @@ import { map } from "rxjs";
 import { Message } from "../../models/Message";
 import { SuggestionItem } from "../../models/front.models/SuggestionItem";
 import { ConnectionService } from "./connection.service";
+import { Router } from "@angular/router";
 
 
 @Injectable({
@@ -12,7 +13,8 @@ import { ConnectionService } from "./connection.service";
 })
 export class UserService{
  private user:User
- constructor(private connectionService:ConnectionService){
+ constructor(private connectionService:ConnectionService,private router:Router){
+
    let userDetails:any=localStorage.getItem("userDetails")
         if(userDetails!=null){
              userDetails=JSON.parse(userDetails)
@@ -77,6 +79,7 @@ return  this.connectionService.post("auth/signUp",{
  logOff(){
   localStorage.clear()
    this.user=null
+  this.router.navigate(['/login'])
  }
  getProfileId(){
  

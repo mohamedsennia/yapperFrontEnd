@@ -6,13 +6,14 @@ import { ReplyComponent } from '../reply/reply.component';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../core/services/Post.service';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-post',
     templateUrl: './post.component.html',
     styleUrl: './post.component.css',
     standalone: true,
-    imports: [NgIf, InputComponent, ReplyComponent,FormsModule,CommonModule]
+    imports: [NgIf, InputComponent, ReplyComponent,FormsModule,CommonModule,RouterLink]
 })
 export class PostComponent  implements OnInit, OnDestroy{
  commentsShowen:boolean

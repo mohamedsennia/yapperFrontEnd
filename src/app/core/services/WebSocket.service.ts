@@ -6,6 +6,7 @@ import { Message } from '../../models/Message';
 import { MessageService } from './Message.service';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ConversationService } from './conversation.service';
+import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -13,29 +14,27 @@ import { ConversationService } from './conversation.service';
 export class WebSocketService {
   private client: Client;
   connected:Subject<boolean>
-  notifications:Subject<number>
+  notifications:Subject<any>
   constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
     let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
     this.connected=new Subject<boolean>()
-    this.notifications=new Subject<number>()
+    this.notifications=new Subject<any>()
 if(userDetails){
     let token=userDetails["userKey"]
     this.client = new Client({
-      webSocketFactory: () => new SockJS('http://localhost:8080/messenger'),
+      webSocketFactory: () => new SockJS(environment.apiBaseUrl+'/messenger'),
        connectHeaders: {
     Authorization: `Bearer ${token}`
       }, // Use SockJS as fallback
       onConnect: () => {
           this.connected.next(true)
-                 console.log(this.userService.getProfileId())
+                 
         this.client.subscribe("/user/notification/messages",(message)=>{
    
           let messageBody=JSON.parse(message.body)
-          if(messageBody.type=="NewConversation"){
-            this.notifications.next(+messageBody.content)
-          }
-          console.log(messageBody)
-          // 
+          this.notifications.next(messageBody)
+          
+          
          
         })
       },
@@ -65,6 +64,7 @@ this.client.activate();
       this.client.subscribe("/conversation/"+conversationId,message=>{
       let messageBody=JSON.parse(message.body)
 
+          this.messageService.messagesSubject.next(new Message(messageBody.id,messageBody.content,messageBody.time,messageBody.sender.id==this.userService.getProfileId(),conversationId))
      
       
     })

@@ -8,19 +8,16 @@
 </div>
 <app-input [suggestions]="users" (contentChange)="typing($event)"  width="w-150" placeholder="Find other yappers.." icon="search"></app-input>
 <div>
-    <div class="cursor-pointer flex items-end relative" (click)="toggleMenu()" (mouseleave)="closeMenu()">
+    <div class="cursor-pointer flex items-end relative" (click)="toggleMenu()" >
     <span class="text-l font-medium text-gray-700 mr-2">{{getUserName()}}</span>
     <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
-   <div class="absolute w-full  top-[150%] bg-white border border-gray-300 rounded-lg shadow-2xl py-2" [ngClass]="{'hidden': !menuOppen}">
-        <a href="#" class="flex items-end  px-3 py-2 hover:bg-gray-100">
+   <div class="absolute -left-20  top-[150%] bg-white border border-gray-300 rounded-lg shadow-2xl py-2 w-40" [ngClass]="{'hidden': !menuOppen}">
+        <a [routerLink]="['yapper/'+getProfileId()]" class="flex items-end  px-3 py-2 hover:bg-gray-100">
             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
            <span class="ml-1 block">Profile</span>
         </a>
-        <a href="#" class="flex items-end  px-3 py-2 hover:bg-gray-100">
-            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-           <span class="ml-1 block">Settings</span>
-        </a>
-        <a href="#" class="flex items-end  px-3 py-2 hover:bg-gray-100">
+
+        <a (click)="logout()" class="flex items-end  px-3 py-2 hover:bg-gray-100">
            <svg  xmlns="http://www.w3.org/2000/svg"  width="26"  height="24"  viewBox="-3 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
            <span class="ml-1 block">Log out</span>
         </a>

@@ -11,6 +11,10 @@ export class ConversationService{
     private _conversationsIndex: Map<number, number>;
     private conversations:Conversation[]
     private conversationsCount:number
+    private _newConversationCounter: number = -1;
+   
+   
+    
     openConversations:Conversation[]
     conversationsSubject:BehaviorSubject<Conversation[]>
   
@@ -36,8 +40,10 @@ export class ConversationService{
         })
         
         })
-        this.webSocketService.notifications.subscribe((conversationId)=>{
-            this.connectionService.get<any>("conversation/"+conversationId).subscribe((conversation)=>{
+        this.webSocketService.notifications.subscribe((notification)=>{
+            if(notification.type=="NewConversation"){
+                let conversationId=+notification.content
+                this.connectionService.get<any>("conversation/"+conversationId).subscribe((conversation)=>{
              
                 let conv=new Conversation(conversation.id,[conversation.lastMessage],conversation.conversationName,false)
                 this.conversations.push(conv)
@@ -52,6 +58,23 @@ export class ConversationService{
                 })
                  
             })
+            
+                }
+            if(notification.type=="IdUpdate"){
+                let split=(notification.content as string).split(':')
+                let oldId=split[0]
+                let newId=split[1]
+                
+                let index=this._conversationsIndex.get(+oldId)
+                
+           
+                this.conversations[index].id=+newId
+                this._conversationsIndex.delete(+oldId)
+                this._conversationsIndex.set(+newId,index)
+    
+                this.webSocketService.subscribe(+newId)
+            }
+            
         })
         messageService.messagesSubject.subscribe((message)=>{
             let conversation=this.conversations[this._conversationsIndex.get(message.conversationId)]
@@ -118,5 +141,11 @@ export class ConversationService{
     closeConversation(index:number){
         this.openConversations[index].isOpen=false
         this.openConversations.splice(index,1)
+    }
+    incremanteCounter(){
+        this._newConversationCounter=this.newConversationCounter-1
+    }
+     public get newConversationCounter(): number {
+        return this._newConversationCounter;
     }
 }

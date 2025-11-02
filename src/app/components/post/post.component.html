@@ -1,6 +1,6 @@
 <div class="flex items-center justify-between w-full border-b border-gray-300 pb-4">
    <div class="flex items-center ">
-     <svg class="inline-block mr-2" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" role="img" aria-label="User avatar">
+     <svg [routerLink]="'/yapper/'+post.profile.id" class="inline-block mr-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" role="img" aria-label="User avatar">
         <defs>
             <linearGradient id="avatarBg32" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="#87c5ff"/>
@@ -20,7 +20,7 @@
 
     <div class="flex items-baseline flex-col ">
 
-        <h4 class="font-semibold">{{post.profile.profileName}} </h4><span class="text-gray-500 text-[12px] pl-1 font-semibold">{{formateDate(post.date)}}</span>
+        <h4 class="font-semibold cursor-pointer"  [routerLink]="'/yapper/'+post.profile.id">{{post.profile.profileName }} </h4><span class="text-gray-500 text-[12px] pl-1 font-semibold">{{formateDate(post.date)}}</span>
     </div>
    </div>
     <div class="flex items-center">

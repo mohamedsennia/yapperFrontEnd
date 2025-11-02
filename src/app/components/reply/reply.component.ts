@@ -2,11 +2,13 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../../models/Post';
 import { PostService } from '../../core/services/Post.service';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-reply',
     templateUrl: './reply.component.html',
     styleUrl: './reply.component.css',
+    imports:[RouterLink],
     standalone: true
 })
 export class ReplyComponent implements OnInit, OnDestroy{

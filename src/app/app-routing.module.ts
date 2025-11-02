@@ -18,6 +18,7 @@ export const routes: Routes = [
       { path: "yapper/:id", component: UserProfileComponent },
       { path: "", redirectTo: "feed", pathMatch: "full" }, // default route
     ],
+    canActivate:[authGuard]
   },
   { path: "**", redirectTo: "feed" }, // wildcard fallback
 ];
