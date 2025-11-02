@@ -6,7 +6,7 @@ import { Message } from '../../models/Message';
 import { MessageService } from './Message.service';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ConversationService } from './conversation.service';
-import { environment } from '../../environments/environments';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
