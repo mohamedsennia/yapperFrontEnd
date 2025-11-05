@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://parseapi.back4app.com',
+  apiBaseUrl: 'yapper-0y70o3c5.b4a.run',
 };
