@@ -1,8 +1,16 @@
 [build]
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm run build"
   publish = "dist/your-project-name"
+
+[build.environment]
+  NPM_FLAGS = "--legacy-peer-deps"
 ```
 
-2. Or create/update `.npmrc` file in your project root:
+**Important:** Replace `your-project-name` with your actual Angular project name (the folder name inside `dist/` after building).
+
+## Alternative: If the above doesn't work
+
+Create or update your `.npmrc` file in the project root with this content:
 ```
 legacy-peer-deps=true
+force=true
