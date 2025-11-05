@@ -1,13 +1,20 @@
 import { Message } from "./Message";
 
 export class User{
+  public get profileId(): number {
+    return this._profileId;
+  }
+  public set profileId(value: number) {
+    this._profileId = value;
+  }
+
     constructor( private  id:number,
      private  firstName:string,
       private lastName:string,
       private email:string,
-      private password:string,
-      private key:string,
-    private message:Message
+      private _profileId: number,
+      private password?:string,
+      private key?:string
     ){}
    
       getId(){
@@ -46,10 +53,8 @@ export class User{
       setKey(key:string){
        this.key=key
       }
-      getMessage(){
-        return this.message
-      }
-      setMessage(message:Message){
-        this.message=message
-      }
+      
+
+
+
    }

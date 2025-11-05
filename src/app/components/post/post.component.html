@@ -1,0 +1,44 @@
+<div class="flex items-center justify-between w-full border-b border-gray-300 pb-4">
+   <div class="flex items-center ">
+     <svg [routerLink]="'/yapper/'+post.profile.id" class="inline-block mr-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" role="img" aria-label="User avatar">
+        <defs>
+            <linearGradient id="avatarBg32" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#87c5ff"/>
+            <stop offset="1" stop-color="#3da5ff"/>
+            </linearGradient>
+        </defs>
+        <!-- Background circle -->
+        <circle cx="64" cy="64" r="62" fill="url(#avatarBg32)"/>
+        <!-- Head + shoulders silhouette -->
+        <g fill="#ffffff">
+            <!-- Head -->
+            <circle cx="64" cy="48" r="18"/>
+            <!-- Shoulders / bust -->
+            <path d="M28 96c5-18 20-28 36-28s31 10 36 28a2 2 0 0 1-2 2H30a2 2 0 0 1-2-2z"/>
+        </g>
+     </svg>
+
+    <div class="flex items-baseline flex-col ">
+
+        <h4 class="font-semibold cursor-pointer"  [routerLink]="'/yapper/'+post.profile.id">{{post.profile.profileName }} </h4><span class="text-gray-500 text-[12px] pl-1 font-semibold">{{formateDate(post.date)}}</span>
+    </div>
+   </div>
+    <div class="flex items-center">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  [attr.fill]="post.liked?'#e91e63':'none'"  [attr.stroke]="post.liked?'#e91e63':'currentColor'" stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-heart cursor-pointer" (click)="like()" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+        <span class="text-sm text-gray-500">{{post.likesCount}}</span>
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bubble cursor-pointer ml-4" (click)="showComments()"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12.4 3a5.34 5.34 0 0 1 4.906 3.239a5.333 5.333 0 0 1 -1.195 10.6a4.26 4.26 0 0 1 -5.28 1.863l-3.831 2.298v-3.134a2.668 2.668 0 0 1 -1.795 -3.773a4.8 4.8 0 0 1 2.908 -8.933a5.33 5.33 0 0 1 4.287 -2.16" /></svg>
+        <span class="text-sm text-gray-500">{{post.commentsCount}}</span>    
+    </div>
+</div>
+<p class="pt-6 py-4 px-0 text-base text-gray-700">
+    {{post.content}}
+</p>
+<div class="border-t border-gray-300 pt-4 flex flex-col" *ngIf="commentsShowen">
+
+    <app-input [(content)]="newComment" (enter)="comment()"  width="w-full" placeholder="Yapp back"></app-input>
+    <app-reply [reply]="comment" *ngFor="let comment of comments"></app-reply>
+    <!-- <app-reply ></app-reply>
+    <app-reply ></app-reply>
+     -->
+    <span (click)="getComments()" *ngIf="!last" class="text-gray-500 text-[12px] mt-2 cursor-pointer" #scrollTarget>Load more...</span>
+</div>

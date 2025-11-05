@@ -1,0 +1,13 @@
+:host{
+    display: block;
+    width: 300px;
+ background-color: white;
+ height: calc(100vh - 124px);
+ min-height: 300px;
+ overflow: auto;
+ position: fixed;
+ border-radius: 16px;
+ box-shadow:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)  ;
+ border: 1px solid oklch(92.8% 0.006 264.531) ; 
+
+}

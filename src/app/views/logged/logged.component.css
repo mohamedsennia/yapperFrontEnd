@@ -1,0 +1,14 @@
+:host{
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 12px;
+    width: calc(100vw - 40px);
+}
+.main{
+    
+    display: inline-block;
+}
+.conversation-holder{
+    width: calc(100% - 316px);
+}

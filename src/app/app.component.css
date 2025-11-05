@@ -3,6 +3,9 @@
 
     display: block;
 }
+*{
+    font-family: sans-serif;
+}
 div{
     display: flex;
     flex-direction: column;

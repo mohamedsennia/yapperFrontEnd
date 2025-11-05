@@ -1,0 +1,48 @@
+<div class=" bg-white border border-gray-300 rounded-xl shadow-2xl flex flex-col items-center  " *ngIf="isSet">
+    <div class="h-50 w-full relative rounded-t-xl">
+        <div class=" w-full px-12 relative h-[70%] bg-gradient-to-r from-[#8fd3ff] to-[#4aa9ff] rounded-t-xl">
+       
+        </div>
+        <svg class="absolute pic" xmlns="http://www.w3.org/2000/svg" width="124" height="124" viewBox="0 0 128 128" role="img" aria-label="User avatar">
+            <defs>
+                <linearGradient id="avatarBg32" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#87c5ff"/>
+                <stop offset="1" stop-color="#3da5ff"/>
+                </linearGradient>
+            </defs>
+            <!-- Background circle -->
+            <circle cx="64" cy="64" r="62" fill="url(#avatarBg32)"/>
+            <!-- Head + shoulders silhouette -->
+            <g fill="#ffffff">
+                <!-- Head -->
+                <circle cx="64" cy="48" r="18"/>
+                <!-- Shoulders / bust -->
+                <path d="M28 96c5-18 20-28 36-28s31 10 36 28a2 2 0 0 1-2 2H30a2 2 0 0 1-2-2z"/>
+            </g>
+        </svg>
+
+    </div>
+
+   <div class="flex flex-col items-center px-12  pt-2 ">
+     <h3 class="text-3xl text-gray-900 font-semibold  text-center mt-2 w-70 truncate">{{profile.profileName}}</h3>
+     <!-- <h4 class="text-sm text-gray-500 font-medium">{{user.getEmail()}} </h4> -->
+     <div class="w-full flex justify-between  text-gray-700 mt-4 mb-4 px-2">
+        <div>
+            <span class="font-medium">Followers: </span>
+            <span>{{profile.subscribers}}</span>
+        </div>
+        <div>
+            <span class="font-medium">Following: </span>
+            <span>{{profile.subscriptions}}</span>
+        </div>
+     </div>
+
+   </div >
+     <div class="flex  items-center w-full pb-6 px-4" *ngIf="!profile.isMe()">
+        <app-button class="w-full mr-2" (click)="toggleFollow()" [text]="profile.isFollowed?'Unfollow':'Follow'" [theme]="profile.isFollowed?'light':'primary'"></app-button>
+        <svg (click)="conversation()"  xmlns="http://www.w3.org/2000/svg"  width="48"  height="48"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-2 cursor-pointer text-[#7CC7FF]"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z" /></svg>
+    </div>
+    <div class="flex  items-center w-full pb-6 px-4" *ngIf="profile.isMe()">
+         <app-button class="w-full mr-2" (click)="toggleFollow()" text="Settings" icon="settings"></app-button>
+    </div>
+</div>
