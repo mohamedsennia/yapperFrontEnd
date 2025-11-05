@@ -1,0 +1,8 @@
+[build]
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "dist/your-project-name"
+```
+
+2. Or create/update `.npmrc` file in your project root:
+```
+legacy-peer-deps=true
