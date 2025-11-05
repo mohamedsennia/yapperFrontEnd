@@ -1,5 +1,5 @@
 
 export const environment = {
-  production: false,
+  production: true,
   apiBaseUrl: 'https://parseapi.back4app.com',
 };
