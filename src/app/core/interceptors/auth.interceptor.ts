@@ -1,11 +1,11 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent, HttpErrorResponse, HttpClient } from "@angular/common/http";
 import { inject, Inject } from "@angular/core";
 import { catchError, Observable, switchMap, throwError } from "rxjs";
-import { ConnectionService } from "../services/connection.service";
+import { environment } from "../../../environments/environment";
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
 let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
-let connectionService:ConnectionService=Inject(ConnectionService)
+let apiURL=environment.apiBaseUrl+"/api"
 const http=inject(HttpClient)
   if(req.url.includes("/auth")){
     return next(req)
@@ -23,11 +23,11 @@ if(userDetails){
   return next(req)
   .pipe(
     catchError((err:HttpErrorResponse)=>{
-          console.log(err)
-      return connectionService.post<any>("/auth/refresh",{}).pipe(
+      
+      return http.post<any>(apiURL+"/auth/refresh",{},{withCredentials:true}).pipe(
         
         switchMap(res=>{
-      
+          console.log(res)
           if(userDetails){
             userDetails["userKey"]=res.token;
             localStorage.setItem("userDetails",JSON.stringify(userDetails));
