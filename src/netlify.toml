@@ -1,16 +1,7 @@
 [build]
-  command = "npm run build"
-  publish = "dist/your-project-name"
+  command = "rm -rf node_modules package-lock.json && npm install && npm run build -- --configuration production"
+  publish = "dist/messenger-app-front/browser"
 
 [build.environment]
   NPM_FLAGS = "--legacy-peer-deps"
-```
-
-**Important:** Replace `your-project-name` with your actual Angular project name (the folder name inside `dist/` after building).
-
-## Alternative: If the above doesn't work
-
-Create or update your `.npmrc` file in the project root with this content:
-```
-legacy-peer-deps=true
-force=true
+  NODE_VERSION = "18"
