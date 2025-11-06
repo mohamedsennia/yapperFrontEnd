@@ -1,7 +1,6 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent, HttpErrorResponse, HttpClient } from "@angular/common/http";
 import { inject, Inject } from "@angular/core";
 import { catchError, Observable, switchMap, throwError } from "rxjs";
-
 import { ConnectionService } from "../services/connection.service";
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
@@ -24,10 +23,11 @@ if(userDetails){
   return next(req)
   .pipe(
     catchError((err:HttpErrorResponse)=>{
+          console.log(err)
       return connectionService.post<any>("/auth/refresh",{}).pipe(
         
         switchMap(res=>{
-          console.log(res)
+      
           if(userDetails){
             userDetails["userKey"]=res.token;
             localStorage.setItem("userDetails",JSON.stringify(userDetails));
@@ -39,7 +39,6 @@ if(userDetails){
             return next(newReq);
         }),
       )
-    
    
   })
 )
