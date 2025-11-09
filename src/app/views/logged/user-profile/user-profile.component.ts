@@ -44,8 +44,11 @@ constructor(private postService:PostService,private activatedRouter:ActivatedRou
   ngAfterViewChecked(): void {
        if (this.loadTrigger && !this.observer) {
     this.observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
+      if(this.posts.length>0){
+        if (entries[0].isIntersecting) {
+        
         this.nextPage();
+      }
       }
     });
     this.observer.observe(this.loadTrigger.nativeElement);
@@ -58,7 +61,7 @@ ngOnInit(): void {
        this.posts=[]
       
       this.profile=profile
-      console.log(profile)
+      
       this.isSet=true
        this.getPosts()
     }))
