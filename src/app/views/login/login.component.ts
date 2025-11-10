@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit{
   loginForm:FormGroup;
   signUpForm:FormGroup;
   badCred:boolean=false;
-  err:boolean=false
+  err:boolean=false;
+  
 constructor( private userService:UserService,private router:Router){
  this.flip='inactive';
  this.loginForm=new FormGroup({});
@@ -60,11 +61,14 @@ signUp(){
 
  },err=>{
    this.userService.logOff()
-   console.log(err+"hhhhhhhhhh")
-   window.alert('Please check your signUp info1')
+   if(err.status==403){
+        this.badCred=true
+        return
+      }
+      this.err=true
  })
 }else{
- window.alert('Please check your login info')
+ this.badCred=true
 }
 }
 login(){
@@ -77,11 +81,14 @@ login(){
 
    },err=>{
      this.userService.logOff()
-      console.log(err)
-     window.alert('Please check your login info')
+      if(err.status==403){
+        this.badCred=true
+        return
+      }
+      this.err=true
    })
  }else{
-   window.alert('Please check your login info')
+    this.badCred=true
  }
 }
 }
