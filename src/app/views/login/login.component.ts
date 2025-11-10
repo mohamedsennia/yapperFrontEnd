@@ -28,7 +28,9 @@ import { NgClass, NgIf } from '@angular/common';
 export class LoginComponent implements OnInit{
   flip: string
   loginForm:FormGroup;
-  signUpForm:FormGroup
+  signUpForm:FormGroup;
+  badCred:boolean=false;
+  err:boolean=false
 constructor( private userService:UserService,private router:Router){
  this.flip='inactive';
  this.loginForm=new FormGroup({});
@@ -47,6 +49,8 @@ constructor( private userService:UserService,private router:Router){
  })
  }
 toggleFlip(side:string){
+  this.err=false
+  this.badCred=false
  this.flip =side;
 }
 signUp(){
@@ -56,7 +60,7 @@ signUp(){
 
  },err=>{
    this.userService.logOff()
-   console.log(err)
+   console.log(err+"hhhhhhhhhh")
    window.alert('Please check your signUp info')
  })
 }else{
