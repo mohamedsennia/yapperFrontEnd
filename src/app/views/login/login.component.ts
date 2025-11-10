@@ -61,7 +61,7 @@ signUp(){
  },err=>{
    this.userService.logOff()
    console.log(err+"hhhhhhhhhh")
-   window.alert('Please check your signUp info')
+   window.alert('Please check your signUp info1')
  })
 }else{
  window.alert('Please check your login info')
@@ -77,7 +77,7 @@ login(){
 
    },err=>{
      this.userService.logOff()
-   
+      console.log(err+"hhhhhhhhhh")
      window.alert('Please check your login info')
    })
  }else{
