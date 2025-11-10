@@ -52,6 +52,8 @@ export class UserService{
             localStorage.setItem("userDetails",JSON.stringify(userDetails))
 
            return this.user
+        },err=>{
+          console.log("eeeeeeeee")
         }))
  }
  signUp(user:User){
