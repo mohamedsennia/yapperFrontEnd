@@ -1,5 +1,5 @@
 
 export const environment = {
   production: true,
-  apiBaseUrl: 'yapperbackend.railway.internal',
+  apiBaseUrl: 'https://yapperbackend.railway.internal',
 };
