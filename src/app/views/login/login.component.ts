@@ -77,7 +77,7 @@ login(){
 
    },err=>{
      this.userService.logOff()
-      console.log(err+"hhhhhhhhhh")
+      console.log(err)
      window.alert('Please check your login info')
    })
  }else{
