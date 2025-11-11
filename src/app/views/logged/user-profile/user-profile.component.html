@@ -1,15 +1,15 @@
 
 <app-user-card (oppenConversation)="openConversation()" *ngIf="isSet"  [profile]="profile"></app-user-card>
-<div class="flex flex-col justify-center items-center">
-    <div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl max-h-full">
-        <app-post  *ngFor="let post of posts" [post]="post" class="w-150 p-6 border border-gray-200 rounded-2xl shadow  bg-white m-6 block"></app-post>
+<div class="flex flex-col justify-center items-center ">
+    <div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl max-h-full max-lg:w-full">
+        <app-post  *ngFor="let post of posts" [post]="post" class="lg:w-150 max-lg:w-full p-6 border border-gray-200 rounded-2xl shadow  bg-white m-6 block"></app-post>
         <div #loadTrigger *ngIf="!reachedLast"></div>
         
         <div>
     </div>
 
 </div>  
-<div *ngIf="posts.length==0" class="w-150  p-8 border border-gray-200 rounded-2xl text-gray-800  bg-white m-6  text-xl font-semibold flex items-center flex-col justify-center shadow-2xl"> 
+<div *ngIf="posts.length==0" class="lg:w-150 max-lg:w-[95%]  p-8 border border-gray-200 rounded-2xl text-gray-800  bg-white m-6  text-xl font-semibold flex items-center flex-col justify-center shadow-2xl"> 
     <img class="h-40" src="./assets/bird.png" alt="">
     <span class="text-center">This user is still silent ....<br>No yapps from him so far </span>
 </div>
