@@ -3,12 +3,13 @@ import { RouterOutlet } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 standalone:true,
-imports:[RouterOutlet]
+imports: [RouterOutlet, ]
 })
 export class AppComponent {
   title = 'Yapper';

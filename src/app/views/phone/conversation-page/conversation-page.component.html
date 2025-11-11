@@ -1,0 +1,12 @@
+<div class="w-full flex flex-col justify-end h-150">
+<div class="w-full h-[75%] flex  overflow-auto flex-col-reverse" >
+        <div *ngFor="let message of conversation.messages" class="my-2 w-full px-4 flex h-fit break-words" [ngClass]="{'justify-end': message.isMine,'justify-start': !message.isMine}">
+            <p class="w-fit inline-block max-w-full h-fit break-words py-2 px-4 rounded-4xl" [ngClass]="{'   bg-blue-700 text-white': message.isMine,'bg-white border-gray-200 border text-gray-900': !message.isMine}">{{message.content}}</p>
+        </div>
+        
+    </div>
+    <div class="w-full h-25 bg-white rounded-lg border border-gray-200 mt-5">
+    <input [(ngModel)]="messageContent" (keydown.enter)="sendMessage()"  class="w-full h-full outline-none p-3  placeholder:text-gray-300 whitespace-break-spaces overflow-y-scroll" placeholder="New message..">
+    </div>
+</div>
+

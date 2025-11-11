@@ -16,10 +16,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostComponent } from './components/post/post.component';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ButtonComponent } from './components/button/button.component';
-import { UserProfileComponent } from './views/logged/user-profile/user-profile.component';
-import { ConversationComponent } from './components/conversation/conversation.component';
-import { LoggedComponent } from './views/logged/logged.component';
-import { ConversationsListComponent } from './components/conversations-list/conversations-list.component';
+
+
 
 @NgModule({
     declarations: [
@@ -28,6 +26,9 @@ import { ConversationsListComponent } from './components/conversations-list/conv
 
   
    
+  
+  
+
   ],
     imports: [
         BrowserModule,

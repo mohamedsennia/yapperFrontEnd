@@ -6,20 +6,25 @@ import { authGuard } from './core/guards/auth-guard.service';
 import { FeedComponent } from './views/logged/feed/feed.component';
 import { UserProfileComponent } from './views/logged/user-profile/user-profile.component';
 import { LoggedComponent } from './views/logged/logged.component';
+import { ConversationPageComponent } from './views/phone/conversation-page/conversation-page.component';
 
 export const routes: Routes = [
   { path: "login", component: LoginComponent },
+ 
   {
     path: "",
     component: LoggedComponent,
     children: [
       { path: "feed", component: FeedComponent },
-      { path: "conversation/:id", component: ChatComponent, canActivate: [authGuard] },
+     
       { path: "yapper/:id", component: UserProfileComponent },
+       {path:"conversation/:id",component:ConversationPageComponent},
+       {path:"conversation",component:ConversationPageComponent},
       { path: "", redirectTo: "feed", pathMatch: "full" }, // default route
     ],
     canActivate:[authGuard]
   },
+  
   { path: "**", redirectTo: "feed" }, // wildcard fallback
 ];
 

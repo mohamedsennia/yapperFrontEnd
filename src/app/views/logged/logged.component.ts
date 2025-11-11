@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ConversationService } from '../../core/services/conversation.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -15,10 +15,14 @@ import { MessageService } from '../../core/services/Message.service';
   standalone:true,
   imports: [RouterOutlet, NavbarComponent, ConversationsListComponent,ConversationComponent,CommonModule]
 })
-export class LoggedComponent {
+export class LoggedComponent implements AfterViewInit{
+  width:number
   constructor(private conversationService:ConversationService){
  
 
+  }
+  ngAfterViewInit(): void {
+    this.width = window.innerWidth;
   }
 
 getOpenConversations(){
