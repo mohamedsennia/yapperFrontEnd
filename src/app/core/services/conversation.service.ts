@@ -23,8 +23,7 @@ export class ConversationService{
         this._conversationsIndex=new Map<number,number>;
         this.openConversations=[]
         this.conversationsSubject=new BehaviorSubject<Conversation[]>([])
-        this.webSocketService.connected.subscribe((param)=>{
-            this.connectionService.get<any[]>("conversation").subscribe((conversations)=>{
+        this.connectionService.get<any[]>("conversation").subscribe((conversations)=>{
     
             let index=0
             for(let conversation of conversations){
@@ -33,12 +32,16 @@ export class ConversationService{
                 this._conversationsIndex.set(conversation.id,index)
                 index++
               
-                this.webSocketService.subscribe(conversation.id)
+                
             }
             this.conversationsSubject.next(this.conversations.slice())
             
         })
-        
+        this.webSocketService.connected.subscribe((param)=>{
+            
+            for(let conversation of this.conversations){
+                this.webSocketService.subscribe(conversation.id)
+            }
         })
         this.webSocketService.notifications.subscribe((notification)=>{
             if(notification.type=="NewConversation"){
