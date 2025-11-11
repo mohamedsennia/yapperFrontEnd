@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { UserService } from '../../core/services/UserService';
 import { InputComponent } from '../input/input.component';
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { SuggestionItem } from '../../models/front.models/SuggestionItem';
 import { RouterLink } from '@angular/router';
 import { ProfileService } from '../../core/services/profile.service';
@@ -11,16 +11,21 @@ import { ProfileService } from '../../core/services/profile.service';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css',
     standalone: true,
-    imports: [InputComponent, NgClass, RouterLink]
+    imports: [InputComponent, NgClass, RouterLink,CommonModule]
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit{
   menuOppen:boolean
   users:SuggestionItem[]
   search:string=""
+  width:number=0
   constructor(private profileService:ProfileService,private userService:UserService){
     this.menuOppen=false
     this.users=[]
   }
+  ngAfterViewInit(): void {
+    this.width = window.innerWidth;
+  }
+
   getUserName(){
     
     return this.userService.getUserName()

@@ -7,6 +7,7 @@ import { FeedComponent } from './views/logged/feed/feed.component';
 import { UserProfileComponent } from './views/logged/user-profile/user-profile.component';
 import { LoggedComponent } from './views/logged/logged.component';
 import { ConversationPageComponent } from './views/phone/conversation-page/conversation-page.component';
+import { ConversationsListPageComponent } from './views/phone/conversations-list-page/conversations-list-page.component';
 
 export const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -19,7 +20,7 @@ export const routes: Routes = [
      
       { path: "yapper/:id", component: UserProfileComponent },
        {path:"conversation/:id",component:ConversationPageComponent},
-       {path:"conversation",component:ConversationPageComponent},
+       {path:"conversations",component:ConversationsListPageComponent},
       { path: "", redirectTo: "feed", pathMatch: "full" }, // default route
     ],
     canActivate:[authGuard]

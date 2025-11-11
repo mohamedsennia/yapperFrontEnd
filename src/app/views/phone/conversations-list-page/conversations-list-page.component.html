@@ -1,0 +1,28 @@
+<div class="w-full h-[85%] flex flex-col justify-end bg-white text-black rounded-3xl">
+    <div class="h-15 w-full border-t border-gray-300 hover:bg-gray-50 flex items-center pl-5 " [routerLink]="['/conversation',conv.id]" *ngFor="let conv of conversations">
+       
+    <svg class="inline-block mr-2" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" role="img" aria-label="User avatar">
+        <defs>
+            <linearGradient id="avatarBg32" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#87c5ff"/>
+            <stop offset="1" stop-color="#3da5ff"/>
+            </linearGradient>
+        </defs>
+        <!-- Background circle -->
+        <circle cx="64" cy="64" r="62" fill="url(#avatarBg32)"/>
+        <!-- Head + shoulders silhouette -->
+        <g fill="#ffffff">
+            <!-- Head -->
+            <circle cx="64" cy="48" r="18"/>
+            <!-- Shoulders / bust -->
+            <path d="M28 96c5-18 20-28 36-28s31 10 36 28a2 2 0 0 1-2 2H30a2 2 0 0 1-2-2z"/>
+        </g>
+    </svg>
+    <div class="ml-2 flex flex-col">
+        <h4 class="text-md text-gray-900 font-semibold inline-block  truncate">{{conv.conversationName}}</h4>
+        <span class="text-sm text-gray-900 font-medium inline-block  truncate">{{conv.messages[0].content}}</span>
+    </div>
+    </div>
+    <span *ngIf="conversations.length==0" class="w-full text-center py-6 text-xl font-semibold inline-block">No messages for you yet</span>
+
+</div>

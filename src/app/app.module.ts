@@ -19,6 +19,8 @@ import { ButtonComponent } from './components/button/button.component';
 
 
 
+
+
 @NgModule({
     declarations: [
 
@@ -29,6 +31,8 @@ import { ButtonComponent } from './components/button/button.component';
   
   
 
+  
+
   ],
     imports: [
         BrowserModule,
@@ -37,15 +41,6 @@ import { ButtonComponent } from './components/button/button.component';
         ReactiveFormsModule,
         HttpClientModule,
         FormsModule,
-        LoginComponent,
-        ChatComponent,
-        HeaderComponent,
-        FeedComponent,
-        InputComponent,
-        NavbarComponent,
-        PostComponent,
-        ReplyComponent,
-        ButtonComponent
     ],
     providers: [],
     bootstrap: []
