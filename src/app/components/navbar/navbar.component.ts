@@ -3,7 +3,7 @@ import { UserService } from '../../core/services/UserService';
 import { InputComponent } from '../input/input.component';
 import { CommonModule, NgClass } from '@angular/common';
 import { SuggestionItem } from '../../models/front.models/SuggestionItem';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ProfileService } from '../../core/services/profile.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ProfileService } from '../../core/services/profile.service';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css',
     standalone: true,
-    imports: [InputComponent, NgClass, RouterLink,CommonModule]
+    imports: [InputComponent, NgClass, RouterLink, CommonModule, RouterLinkActive]
 })
 export class NavbarComponent implements AfterViewInit{
   menuOppen:boolean

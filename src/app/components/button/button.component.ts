@@ -12,4 +12,5 @@ export class ButtonComponent {
 @Input() text!:string
 @Input() theme:string="primary"
 @Input() icon!:string
+@Input() padding:string="py-2 "
 }

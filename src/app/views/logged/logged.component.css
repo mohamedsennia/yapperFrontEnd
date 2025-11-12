@@ -6,6 +6,9 @@
     width: calc(100vw - 40px);
     margin: auto;
 }
+.costume-container{
+    min-height: calc(100vh - 110px);
+}
 .main{
     
     display: inline-block;

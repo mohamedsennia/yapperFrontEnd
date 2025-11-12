@@ -1,9 +1,9 @@
 <app-navbar ></app-navbar>
-<div class="min-h-full flex mt-4 justify-end">
+<div class="costume-container flex mt-4 justify-end max-lg:w-full">
 <router-outlet></router-outlet>
-<div class="min-h-full w-75" *ngIf="width>1024"></div>
-<app-conversations-list *ngIf="width>1024"></app-conversations-list>
+<div class="costume-container w-75 max-lg:hidden block" ></div>
+<app-conversations-list class="max-lg:hidden  block"></app-conversations-list>
 </div>
-<div *ngIf="width>1024" class="fixed bottom-0 left-0 flex pb-[2px] gap-x-4 px-4 conversation-holder justify-end">
+<div  class="fixed bottom-0 left-0 flex pb-[2px] gap-x-4 px-4 conversation-holder justify-end max-lg:hidden">
     <app-conversation *ngFor="let conversation of getOpenConversations();let i=index" [index]="i"  [conversation]="conversation" ></app-conversation>
 </div>

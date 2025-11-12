@@ -4,7 +4,10 @@
     height: 100%;
 }
 .conversation{
-    height: calc( 100% - 60px);
+    height: calc( 100% - 12px);
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px;
 }
 .input{
     height: 60px;

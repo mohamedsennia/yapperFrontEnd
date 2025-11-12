@@ -7,7 +7,7 @@ import { Post } from '../../../models/Post';
 import { Subscription } from 'rxjs';
 import { PostService } from '../../../core/services/Post.service';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../core/services/UserService';
 import { UserCardComponent } from "../../../components/user-card/user-card.component";
 import { ProfileService } from '../../../core/services/profile.service';
@@ -37,7 +37,7 @@ conversations:Conversation[]
  @ViewChild('loadTrigger',{static:false})loadTrigger!:ElementRef
  private observer!: IntersectionObserver;
  
-constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService,private messageServices:MessageService,private conversationService:ConversationService){
+constructor(private postService:PostService,private activatedRouter:ActivatedRoute,private profileService:ProfileService,private messageServices:MessageService,private conversationService:ConversationService,private router:Router){
   this.subscriptions=new Map<string,Subscription>()
   this.reachedLast=false;
 }
@@ -89,11 +89,20 @@ openConversation(){
   if(this.profile.conversationId==-1){
    
     this.conversationService.addConversation(new Conversation(this.conversationService.newConversationCounter,[],this.profile.profileName,true,this.getTargetId()))
+    
+    if(window.innerWidth<1080){
+      this.router.navigate(['conversation',this.conversationService.newConversationCounter])
+    }
     this.conversationService.incremanteCounter()
+
   }else{
     this.messageServices.getMessagesByConversationId(this.profile.conversationId).subscribe((messages)=>{
-      this.conversationService.openConversation(this.profile.conversationId,messages)
       
+      if(window.innerWidth<1080){
+      this.router.navigate(['conversation',this.profile.conversationId])
+    }else{
+      this.conversationService.openConversation(this.profile.conversationId,messages)
+    }
     })
   }
 }

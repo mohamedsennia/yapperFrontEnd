@@ -1,12 +1,13 @@
 :host{
     
     max-height: 100%;
-    
+    width: 100%;
 }
 
 @media screen and (min-width: 1024px) {
   :host {
     width: calc(100% - 300px);
     overflow: hidden;
+
   }
 }

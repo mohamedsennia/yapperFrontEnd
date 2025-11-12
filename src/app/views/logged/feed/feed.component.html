@@ -1,12 +1,12 @@
 
 <div class="flex flex-col justify-center items-center">
-    <div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl p-4 mb-6 lg:w-[650px] max-lg:w-[90%]">
+    <div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl p-4 mb-6 lg:w-[650px] max-lg:w-full">
     <app-input [(content)]="newPostContent" size="area" width="w-full" placeholder="what do you wanna yapp about"></app-input>
     <div class="mt-4 w-full flex justify-end">
         <app-button (click)="sendPost()" text="Post"></app-button>
     </div>
 </div>
-<div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl w-fit ">
+<div class="bg-[#FCFDFD]  border border-[#d7d9e0] rounded-2xl shadow-xl w-fit max-lg:w-full ">
     <app-post  *ngFor="let post of posts" [post]="post" class="lg:w-150 max-lg:w-[90%] p-6 border border-gray-200 rounded-2xl shadow  bg-white m-6 block"></app-post>
     <div #loadTrigger *ngIf="!reachedLast"></div>
 </div>
