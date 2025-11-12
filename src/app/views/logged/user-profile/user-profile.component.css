@@ -20,4 +20,8 @@ align-items: flex-start;
       width: 100%;
 
   }
+    .post {
+    width: calc(100% - 48px);
+
+  }
 }

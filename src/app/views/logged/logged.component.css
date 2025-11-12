@@ -14,5 +14,6 @@
     display: inline-block;
 }
 .conversation-holder{
-    width: calc(100% - 316px);
+    max-width: calc(100% - 316px);
+    width: fit-content;
 }

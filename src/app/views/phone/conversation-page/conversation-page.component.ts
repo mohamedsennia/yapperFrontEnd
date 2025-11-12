@@ -42,11 +42,13 @@ export class ConversationPageComponent implements OnInit{
   }
   sendMessage(){
  if(this.messageContent!=""){
+    
     let message=new Message(0,this.messageContent,new Date(),true,this.conversation.id,this.conversation.targetId)
     
     this.conversation.messages.unshift(message)
+   console.log(this.conversation)
     this.webSocketService.sendMessage(message)
-    if(this.conversation.id==-1){
+    if(this.conversation.id==-1&&window.innerWidth>1024){
       this.conversationService.refreshConversations()
     }
     this.messageContent=""
