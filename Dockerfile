@@ -10,14 +10,14 @@ RUN npm run build
 FROM node:18-alpine
 WORKDIR /app
 
-# Install http-server globally
-RUN npm install -g http-server
+# Install http-server
+RUN npm install http-server
+
+# Copy server script
+COPY server.js ./
 
 # Copy built files
 COPY --from=build /app/dist/messenger-app-front/browser ./dist
 
-# Expose port
-EXPOSE $PORT
-
-# Start command - use PORT environment variable with default fallback
-CMD ["sh", "-c", "http-server dist -p ${PORT:-8080} -a 0.0.0.0"]
+# Start with node
+CMD ["node", "server.js"]
