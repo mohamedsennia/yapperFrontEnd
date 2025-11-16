@@ -21,13 +21,3 @@ EXPOSE $PORT
 
 # Start command
 CMD http-server dist -p $PORT -a 0.0.0.0
-```
-
-**`.dockerignore`:**
-```
-node_modules
-.git
-.gitignore
-README.md
-dist
-.angular
