@@ -1,0 +1,12 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "npm run serve:dist"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+```
+
+### 3. **Create `.npmrc`** (Optional - for faster builds)
+```
+legacy-peer-deps=true
