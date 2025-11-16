@@ -19,5 +19,5 @@ COPY --from=build /app/dist/messenger-app-front/browser ./dist
 # Expose port
 EXPOSE $PORT
 
-# Start command
-CMD http-server dist -p $PORT -a 0.0.0.0
+# Start command - use PORT environment variable with default fallback
+CMD ["sh", "-c", "http-server dist -p ${PORT:-8080} -a 0.0.0.0"]
