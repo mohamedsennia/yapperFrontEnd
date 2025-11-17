@@ -27,6 +27,7 @@ if(userDetails){
     Authorization: `Bearer ${token}`
       }, // Use SockJS as fallback
       onConnect: () => {
+          
           this.connected.next(true)
                  
         this.client.subscribe("/user/notification/messages",(message)=>{
@@ -38,6 +39,9 @@ if(userDetails){
          
         })
       },
+      heartbeatIncoming:2000,
+      heartbeatOutgoing:2000,
+      
       debug: (str) => {
         
       },
