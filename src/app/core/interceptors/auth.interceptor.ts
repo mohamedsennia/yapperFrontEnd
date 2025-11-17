@@ -20,27 +20,30 @@ if(userDetails){
 
 }
 
-  return next(req)
-  .pipe(
-    catchError((err:HttpErrorResponse)=>{
-      
-      return http.post<any>(apiURL+"/auth/refresh",{},{withCredentials:true}).pipe(
-        
-        switchMap(res=>{
-          console.log(res)
-          if(userDetails){
-            userDetails["userKey"]=res.token;
-            localStorage.setItem("userDetails",JSON.stringify(userDetails));
-          }
-         
-          const newReq = req.clone({
-              setHeaders: { Authorization: `Bearer ${res.token}` }
-            });
-            return next(newReq);
-        }),
-      )
-   
+ return next(req).pipe(
+  catchError((err: HttpErrorResponse) => {
+    return http.post<any>(apiURL + "/auth/refresh", {}, { withCredentials: true }).pipe(
+      switchMap(res => {
+        console.log(res);
+        if (userDetails) {
+          userDetails["userKey"] = res.token;
+          localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        }
+
+        const newReq = req.clone({
+          setHeaders: { Authorization: `Bearer ${res.token}` }
+        });
+        return next(newReq);
+      }),
+      catchError(refreshErr => {
+        // Logout logic
+        localStorage.removeItem("userDetails");
+        // optionally redirect to login
+        window.location.href = '/login';
+        return throwError(() => refreshErr);
+      })
+    );
   })
-)
+);
 
 }
