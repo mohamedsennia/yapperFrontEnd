@@ -21,7 +21,9 @@ export class UserService{
         if(userDetails!=null){
              userDetails=JSON.parse(userDetails)
        this.user=new User(+userDetails.userId,undefined,undefined,undefined,+userDetails.profileId,undefined,userDetails.userKey)
-         this.refreshSubscription= this.connectionService.post("auth/refresh",{}).subscribe(()=>{
+         this.refreshSubscription= this.connectionService.post<any>("auth/refresh",{}).subscribe((res)=>{
+          userDetails["userKey"] = res.token;
+          localStorage.setItem("userDetails", JSON.stringify(userDetails));
             this.refreshed.next(true)
             this.refreshSubscription.unsubscribe()
           })
