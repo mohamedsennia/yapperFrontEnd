@@ -51,13 +51,14 @@ if(userDetails){
       },
       reconnectDelay: 5000, // Automatically reconnect after 5 seconds
     });
+    this.client.activate();
       }
     })
 
 }
 
 
-this.client.activate();
+
   //   
   // }
   // sendMessage(message:Message){
