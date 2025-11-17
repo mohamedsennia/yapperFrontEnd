@@ -39,8 +39,8 @@ if(userDetails){
          
         })
       },
-      heartbeatIncoming:2000,
-      heartbeatOutgoing:2000,
+      heartbeatIncoming:20000,
+      heartbeatOutgoing:20000,
       
       debug: (str) => {
         
