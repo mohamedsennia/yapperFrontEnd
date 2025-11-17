@@ -17,13 +17,15 @@ export class WebSocketService {
   notifications:Subject<any>
  private refreshSubscription:Subscription
   constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
-    let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
+  
     this.connected=new Subject<boolean>()
     this.notifications=new Subject<any>()
-if(userDetails){
-    let token=userDetails["userKey"]
+
   this.refreshSubscription=  this.userService.refreshed.subscribe((val)=>{
       if(val==true){
+              let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
+if(userDetails){
+    let token=userDetails["userKey"]
         this.refreshSubscription.unsubscribe()
         this.client = new Client({
       webSocketFactory: () => new SockJS(environment.apiBaseUrl+'/messenger'),
@@ -52,10 +54,10 @@ if(userDetails){
       reconnectDelay: 5000, // Automatically reconnect after 5 seconds
     });
     this.client.activate();
-      }
+      }}
     })
 
-}
+
 
 
 
