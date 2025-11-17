@@ -4,7 +4,7 @@ import SockJS from 'sockjs-client';
 import { UserService } from './UserService';
 import { Message } from '../../models/Message';
 import { MessageService } from './Message.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { ConversationService } from './conversation.service';
 import { environment } from '../../../environments/environment';
 
@@ -15,13 +15,17 @@ export class WebSocketService {
   private client: Client;
   connected:Subject<boolean>
   notifications:Subject<any>
+ private refreshSubscription:Subscription
   constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
     let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
     this.connected=new Subject<boolean>()
     this.notifications=new Subject<any>()
 if(userDetails){
     let token=userDetails["userKey"]
-    this.client = new Client({
+  this.refreshSubscription=  this.userService.refreshed.subscribe((val)=>{
+      if(val==true){
+        this.refreshSubscription.unsubscribe()
+        this.client = new Client({
       webSocketFactory: () => new SockJS(environment.apiBaseUrl+'/messenger'),
        connectHeaders: {
     Authorization: `Bearer ${token}`
@@ -47,6 +51,8 @@ if(userDetails){
       },
       reconnectDelay: 5000, // Automatically reconnect after 5 seconds
     });
+      }
+    })
 
 }
 

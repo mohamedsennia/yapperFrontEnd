@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { User } from "../../models/User";
 
-import { map } from "rxjs";
+import { BehaviorSubject, map, Subscription } from "rxjs";
 import { Message } from "../../models/Message";
 import { SuggestionItem } from "../../models/front.models/SuggestionItem";
 import { ConnectionService } from "./connection.service";
@@ -13,13 +13,18 @@ import { Router } from "@angular/router";
 })
 export class UserService{
  private user:User
+ refreshed:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
+ private refreshSubscription:Subscription
  constructor(private connectionService:ConnectionService,private router:Router){
 
    let userDetails:any=localStorage.getItem("userDetails")
         if(userDetails!=null){
              userDetails=JSON.parse(userDetails)
        this.user=new User(+userDetails.userId,undefined,undefined,undefined,+userDetails.profileId,undefined,userDetails.userKey)
-
+         this.refreshSubscription= this.connectionService.post("auth/refresh",{}).subscribe(()=>{
+            this.refreshed.next(true)
+            this.refreshSubscription.unsubscribe()
+          })
    
 }else{
     
