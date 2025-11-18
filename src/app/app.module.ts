@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './views/login/login.component';
-import { ChatComponent } from './views/logged/chat/chat.component';
+
 import { HeaderComponent } from './views/logged/header/header.component';
 import { FeedComponent } from './views/logged/feed/feed.component';
 import { InputComponent } from './components/input/input.component';
