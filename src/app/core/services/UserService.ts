@@ -57,7 +57,7 @@ export class UserService{
               "profileId":param["profileId"]
             }
             localStorage.setItem("userDetails",JSON.stringify(userDetails))
-
+            this.refreshed.next(true)
            return this.user
         }))
  }
@@ -80,6 +80,7 @@ return  this.connectionService.post("auth/signUp",{
               "profileId":param["profileId"]
             }
             localStorage.setItem("userDetails",JSON.stringify(userDetails))
+               this.refreshed.next(true)
             return this.user
         }))
  }
