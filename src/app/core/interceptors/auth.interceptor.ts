@@ -1,6 +1,6 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent, HttpErrorResponse, HttpClient } from "@angular/common/http";
 import { inject, Inject } from "@angular/core";
-import { catchError, Observable, switchMap, throwError } from "rxjs";
+import { catchError, EMPTY, Observable, switchMap, throwError } from "rxjs";
 import { environment } from "../../../environments/environment";
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
@@ -40,10 +40,13 @@ if(userDetails){
         localStorage.removeItem("userDetails");
         // optionally redirect to login
         window.location.href = '/login';
-        return throwError(() => refreshErr);
+        return EMPTY;
       })
+
     );
-  })
+  }
+  
+)
 );
 
 }
