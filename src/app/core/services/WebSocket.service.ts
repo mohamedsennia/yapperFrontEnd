@@ -17,14 +17,15 @@ export class WebSocketService {
   notifications:Subject<any>
  private refreshSubscription:Subscription
   constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
-    console.log("aaaaaaaaaaa")
+  
     let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
     this.connected=new Subject<boolean>()
     this.notifications=new Subject<any>()
 if(userDetails){
-  
+    console.log("aaaaaaaaaaa")
   this.refreshSubscription=  this.userService.refreshed.subscribe((val)=>{
       if(val==true){
+          console.log("bbbbbbb")
         this.refreshSubscription.unsubscribe()
           let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
             let token=userDetails["userKey"]
