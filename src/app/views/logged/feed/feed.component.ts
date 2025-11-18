@@ -59,7 +59,7 @@ export class FeedComponent implements OnInit,OnDestroy,AfterViewChecked{
     )
   }
   sendPost(){
-
+    this.newPostContent=""
     if(this.newPostContent.trim()!=""){
       
      
@@ -67,7 +67,7 @@ export class FeedComponent implements OnInit,OnDestroy,AfterViewChecked{
       
     
       this.posts.unshift(post)
-      this.newPostContent=""
+      
      })))
     }
   }
