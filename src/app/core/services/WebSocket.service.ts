@@ -22,11 +22,11 @@ export class WebSocketService {
     this.connected=new Subject<boolean>()
     this.notifications=new Subject<any>()
 if(userDetails){
-    console.log("aaaa")
+  
   this.refreshSubscription=  this.userService.refreshed.subscribe((val)=>{
       if(val==true){
-       console.log("bbbb")
-        this.refreshSubscription.unsubscribe()
+       
+        
           let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
             let token=userDetails["userKey"]
         this.client = new Client({
@@ -57,6 +57,7 @@ if(userDetails){
     });
     this.client.activate();
       }
+      this.refreshSubscription.unsubscribe()
     })
 
 }

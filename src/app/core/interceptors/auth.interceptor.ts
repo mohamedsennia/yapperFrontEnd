@@ -24,7 +24,7 @@ if(userDetails){
   catchError((err: HttpErrorResponse) => {
     return http.post<any>(apiURL + "/auth/refresh", {}, { withCredentials: true }).pipe(
       switchMap(res => {
-        console.log(res);
+      
         if (userDetails) {
           userDetails["userKey"] = res.token;
           localStorage.setItem("userDetails", JSON.stringify(userDetails));
