@@ -59,7 +59,7 @@ export class FeedComponent implements OnInit,OnDestroy,AfterViewChecked{
     )
   }
   sendPost(){
-    this.newPostContent=""
+  
     if(this.newPostContent.trim()!=""){
       
      
@@ -70,6 +70,7 @@ export class FeedComponent implements OnInit,OnDestroy,AfterViewChecked{
       
      })))
     }
+      this.newPostContent=""
   }
   nextPage(){
     this.page=this.page+1
