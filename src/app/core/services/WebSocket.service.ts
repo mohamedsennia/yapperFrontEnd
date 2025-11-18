@@ -17,6 +17,7 @@ export class WebSocketService {
   notifications:Subject<any>
  private refreshSubscription:Subscription
   constructor(private userService:UserService,private messageService:MessageService,private messageServices:MessageService) {
+    console.log("aaaaaaaaaaa")
     let userDetails:any=JSON.parse(localStorage.getItem("userDetails"))
     this.connected=new Subject<boolean>()
     this.notifications=new Subject<any>()
