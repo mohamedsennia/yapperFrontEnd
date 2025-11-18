@@ -20,7 +20,7 @@ export class ConversationComponent implements OnInit{
   @Input() conversation:Conversation
   @Input() index:number
   
-  messageContent:string
+  messageContent:string=""
   constructor(private messageService:MessageService,private webSocketService:WebSocketService,private conversationService:ConversationService){
     
   }
