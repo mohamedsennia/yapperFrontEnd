@@ -56,8 +56,9 @@ if(userDetails){
       reconnectDelay: 5000, // Automatically reconnect after 5 seconds
     });
     this.client.activate();
+    this.refreshSubscription.unsubscribe()
       }
-      this.refreshSubscription.unsubscribe()
+      
     })
 
 }
