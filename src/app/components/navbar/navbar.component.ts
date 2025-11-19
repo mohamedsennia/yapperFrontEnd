@@ -66,6 +66,6 @@ export class NavbarComponent implements AfterViewInit{
     clearTimeout(this.timer);
     this.timer=setTimeout(()=>{
       this.typing(value)
-    },2000)
+    },1000)
   }
 }
