@@ -18,6 +18,8 @@ export class NavbarComponent implements AfterViewInit{
   users:SuggestionItem[]
   search:string=""
   width:number=0
+ 
+  timer:any;
   constructor(private profileService:ProfileService,private userService:UserService){
     this.menuOppen=false
     this.users=[]
@@ -41,10 +43,13 @@ export class NavbarComponent implements AfterViewInit{
   }
   typing(value:string){
       this.search=value
+      
+
     if(this.search==""){
       this.users=[]
     }else{
-       this.users=[]
+ 
+     this.users=[]
 
       this.profileService.getProfileLike(this.search).subscribe((users)=>{
         this.users=users
@@ -56,5 +61,11 @@ export class NavbarComponent implements AfterViewInit{
   }
   logout(){
     this.userService.logOff()
+  }
+  debouncing(value:string){
+    clearTimeout(this.timer);
+    this.timer=setTimeout(()=>{
+      this.typing(value)
+    },2000)
   }
 }
